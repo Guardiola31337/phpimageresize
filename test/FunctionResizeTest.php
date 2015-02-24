@@ -19,8 +19,7 @@ class FunctionResizeTest extends PHPUnit_Framework_TestCase {
         'height' => null
     );
 
-    public function testOpts()
-    {
+    public function testOpts() {
         $this->assertInstanceOf('Configuration', new Configuration);
     }
 
