@@ -17,23 +17,27 @@ class Configuration {
     public function __construct($opts=array()) {
         $sanitized= $this->sanitize($opts);
 
-        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts['width'])) {
-            throw new InvalidArgumentException;
-        }
-
         $defaults = array(
             'crop' => false,
             'scale' => 'false',
             'thumbnail' => false,
             'maxOnly' => false,
             'canvas-color' => 'transparent',
-            'output-filename' => false,
+            'output-filename' => 'default-output-filename',
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
             'quality' => 90,
             'cache_http_minutes' => 20,
             'width' => null,
             'height' => null);
+
+        if(empty($opts)) {
+            $opts = $defaults;
+        }
+
+        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts['width'])) {
+            throw new InvalidArgumentException;
+        }
 
         $this->opts = array_merge($defaults, $sanitized);
     }

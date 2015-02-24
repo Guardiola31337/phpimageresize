@@ -10,7 +10,7 @@ class FunctionResizeTest extends PHPUnit_Framework_TestCase {
         'thumbnail' => false,
         'maxOnly' => false,
         'canvas-color' => 'transparent',
-        'output-filename' => false,
+        'output-filename' => 'default-output-filename',
         'cacheFolder' => './cache/',
         'remoteFolder' => './cache/remote/',
         'quality' => 90,
@@ -40,7 +40,10 @@ class FunctionResizeTest extends PHPUnit_Framework_TestCase {
 
         $opts = array(
             'thumbnail' => true,
-            'maxOnly' => true
+            'maxOnly' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
         );
 
         $configuration = new Configuration($opts);
