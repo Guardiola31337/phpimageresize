@@ -17,6 +17,10 @@ class Configuration {
     public function __construct($opts=array()) {
         $sanitized= $this->sanitize($opts);
 
+        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts['width'])) {
+            throw new InvalidArgumentException;
+        }
+
         $defaults = array(
             'crop' => false,
             'scale' => 'false',
