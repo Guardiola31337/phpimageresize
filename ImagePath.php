@@ -27,6 +27,10 @@ class ImagePath {
         return md5_file($this->path);
     }
 
+    public function obtainExtension() {
+        return '';
+    }
+
     private function sanitize($path) {
         return urldecode($path);
     }
