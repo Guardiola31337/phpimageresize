@@ -28,7 +28,10 @@ class ImagePath {
     }
 
     public function obtainExtension() {
-        return '';
+        $filename = $this->obtainFileName();
+        $finfo = pathinfo($filename);
+        $ext = $finfo['extension'];
+        return $ext;
     }
 
     private function sanitize($path) {
