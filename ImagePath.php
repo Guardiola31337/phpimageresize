@@ -24,7 +24,7 @@ class ImagePath {
     }
 
     public function obtainMD5() {
-        return '';
+        return md5_file($this->path);
     }
 
     private function sanitize($path) {
