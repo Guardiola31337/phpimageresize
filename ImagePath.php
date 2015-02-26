@@ -2,6 +2,8 @@
 
 class ImagePath {
 
+    const EXTENSION_KEY = 'extension';
+
     private $path;
     private $valid_http_protocols = array('http', 'https');
 
@@ -30,7 +32,7 @@ class ImagePath {
     public function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);
-        $ext = $finfo['extension'];
+        $ext = $finfo[self::EXTENSION_KEY];
         return $ext;
     }
 
