@@ -23,6 +23,10 @@ class ImagePath {
         return $filename;
     }
 
+    public function obtainMD5() {
+        return '';
+    }
+
     private function sanitize($path) {
         return urldecode($path);
     }
