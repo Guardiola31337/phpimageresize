@@ -49,7 +49,8 @@ class Resizer {
         $w = $this->configuration->obtainWidth();
         $h = $this->configuration->obtainHeight();
 
-        $filename = md5_file($this->path->sanitizedPath());
+        $image = new ImagePath($this->path);
+        $filename = $image->obtainMD5();
         $finfo = pathinfo($this->path->sanitizedPath());
         $ext = $finfo['extension'];
 
