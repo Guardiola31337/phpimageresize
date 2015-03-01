@@ -25,7 +25,7 @@ function isInCache($path, $imagePath) {
 function composeNewPath($imagePath, $configuration) {
 	$w = $configuration->obtainWidth();
 	$h = $configuration->obtainHeight();
-	$filename = md5_file($imagePath);
+	$filename = $imagePath->obtainMD5();
 	$finfo = pathinfo($imagePath);
 	$ext = $finfo['extension'];
 
