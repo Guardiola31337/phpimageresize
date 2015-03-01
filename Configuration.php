@@ -14,6 +14,7 @@ class Configuration {
     const SCALE_KEY = 'scale';
 
     const CROP_SIGNAL = '_cp';
+    const SCALE_SIGNAL = '_sp';
 
     private $opts;
 
@@ -83,7 +84,7 @@ class Configuration {
     }
 
     public function obtainScaleSignal() {
-        return isset($this->opts[self::SCALE_KEY]) && $this->opts[self::SCALE_KEY] == true ? "_sc" : "";
+        return isset($this->opts[self::SCALE_KEY]) && $this->opts[self::SCALE_KEY] == true ? self::SCALE_SIGNAL : "";
     }
 
 }
