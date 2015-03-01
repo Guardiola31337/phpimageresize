@@ -23,6 +23,7 @@ function isInCache($path, $imagePath) {
 }
 
 function composeNewPath($imagePath, $configuration) {
+    $opts = $configuration->asHash();
 	$w = $configuration->obtainWidth();
 	$h = $configuration->obtainHeight();
 	$filename = $imagePath->obtainMD5();
