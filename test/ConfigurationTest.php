@@ -39,4 +39,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('_cp', $configuration->obtainCropSignal());
     }
 
+    public function testObtainEmptyScaleSignalWhenMinimunOptions() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('', $configuration->obtainScaleSignal());
+    }
+
 }

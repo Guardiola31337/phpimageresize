@@ -81,4 +81,8 @@ class Configuration {
         return isset($this->opts[self::CROP_KEY]) && $this->opts[self::CROP_KEY] == true ? self::CROP_SIGNAL : "";
     }
 
+    public function obtainScaleSignal() {
+        return '';
+    }
+
 }
