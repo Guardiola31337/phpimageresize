@@ -21,10 +21,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $configuration = new Configuration($subMinimumOptionsSet);
     }
 
-    public function testObtainCropSignal() {
+    public function testObtainEmptyCropSignalWhenMinimunOptions() {
         $configuration = new Configuration();
 
-        $this->assertEquals('_cp', $configuration->obtainCropSignal());
+        $this->assertEquals('', $configuration->obtainCropSignal());
     }
 
 }
