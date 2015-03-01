@@ -93,7 +93,7 @@ class Configuration {
     }
 
     public function obtainHeightSignal() {
-        return 'height';
+        return isset($this->opts['height']) ? '_h'.$this->obtainHeight() : '';
     }
 
 }
