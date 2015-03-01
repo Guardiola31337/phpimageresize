@@ -92,4 +92,8 @@ class Configuration {
         return isset($this->opts[self::WIDTH_KEY]) ? self::WIDTH_SIGNAL.$this->obtainWidth() : '';
     }
 
+    public function obtainHeightSignal() {
+        return 'height';
+    }
+
 }

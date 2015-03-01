@@ -74,4 +74,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('_w20', $configuration->obtainWidthSignal());
     }
 
+    public function testObtainEmptyHeightSignalWhenMinimunOptions() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('', $configuration->obtainHeightSignal());
+    }
+
 }
