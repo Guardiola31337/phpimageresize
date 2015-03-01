@@ -45,4 +45,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('', $configuration->obtainScaleSignal());
     }
 
+    public function testObtainScaleSignal() {
+        $opts = array(
+            'scale' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('_sc', $configuration->obtainScaleSignal());
+    }
+
 }
