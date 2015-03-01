@@ -14,7 +14,7 @@ class Configuration {
     const SCALE_KEY = 'scale';
 
     const CROP_SIGNAL = '_cp';
-    const SCALE_SIGNAL = '_sp';
+    const SCALE_SIGNAL = '_sc';
 
     private $opts;
 
