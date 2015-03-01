@@ -51,8 +51,7 @@ class Resizer {
 
         $image = new ImagePath($this->path);
         $filename = $image->obtainMD5();
-        $finfo = pathinfo($this->path->sanitizedPath());
-        $ext = $finfo['extension'];
+        $ext = $image->obtainExtension();
 
         $opts = $this->configuration->asHash();
 
