@@ -27,4 +27,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('', $configuration->obtainCropSignal());
     }
 
+    public function testObtainCropSignal() {
+        $opts = array(
+            'crop' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('_cp', $configuration->obtainCropSignal());
+    }
+
 }
