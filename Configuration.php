@@ -32,14 +32,14 @@ class Configuration {
             self::REMOTE_KEY => self::REMOTE_PATH,
             'quality' => 90,
             'cache_http_minutes' => 20,
-            'width' => null,
+            self::WIDTH_KEY => null,
             'height' => null);
 
         if(empty($opts)) {
             $opts = $defaults;
         }
 
-        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts['width'])) {
+        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts[self::WIDTH_KEY])) {
             throw new InvalidArgumentException;
         }
 
@@ -88,7 +88,7 @@ class Configuration {
     }
 
     public function obtainWidthSignal() {
-        return isset($this->opts['width']) ? '_w'.$this->obtainWidth() : '';
+        return isset($this->opts[self::WIDTH_KEY]) ? '_w'.$this->obtainWidth() : '';
     }
 
 }
