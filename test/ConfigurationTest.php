@@ -80,4 +80,15 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('', $configuration->obtainHeightSignal());
     }
 
+    public function testObtainHeightSignal() {
+        $opts = array(
+            'width' => null,
+            'height' => '30',
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('_h30', $configuration->obtainHeightSignal());
+    }
+
 }
