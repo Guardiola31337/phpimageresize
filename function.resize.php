@@ -30,7 +30,7 @@ function composeNewPath($imagePath, $configuration) {
 	$ext = $imagePath->obtainExtension();
 
 	$cropSignal = $configuration->obtainCropSignal();
-	$scaleSignal = isset($opts['scale']) && $opts['scale'] == true ? "_sc" : "";
+	$scaleSignal = $configuration->obtainScaleSignal();
 	$widthSignal = !empty($w) ? '_w'.$w : '';
 	$heightSignal = !empty($h) ? '_h'.$h : '';
 	$extension = '.'.$ext;
