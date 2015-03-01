@@ -63,4 +63,15 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('', $configuration->obtainWidthSignal());
     }
 
+    public function testObtainWidthSignal() {
+        $opts = array(
+            'width' => '20',
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('_w20', $configuration->obtainWidthSignal());
+    }
+
 }
