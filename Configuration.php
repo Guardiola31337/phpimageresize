@@ -88,7 +88,7 @@ class Configuration {
     }
 
     public function obtainWidthSignal() {
-        return 'width';
+        return isset($this->opts['width']) ? '_w'.$this->obtainWidth() : '';
     }
 
 }
