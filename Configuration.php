@@ -76,7 +76,8 @@ class Configuration {
     }
 
     public function obtainCropSignal() {
-        return '';
+        $cropSignal = isset($this->opts['crop']) && $this->opts['crop'] == true ? "_cp" : "";
+        return $cropSignal;
     }
 
 }
