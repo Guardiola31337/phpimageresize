@@ -87,4 +87,8 @@ class Configuration {
         return isset($this->opts[self::SCALE_KEY]) && $this->opts[self::SCALE_KEY] == true ? self::SCALE_SIGNAL : "";
     }
 
+    public function obtainWidthSignal() {
+        return 'width';
+    }
+
 }
