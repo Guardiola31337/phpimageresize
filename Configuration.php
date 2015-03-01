@@ -19,7 +19,7 @@ class Configuration {
         $sanitized= $this->sanitize($opts);
 
         $defaults = array(
-            'crop' => false,
+            self::CROP_KEY => false,
             'scale' => 'false',
             'thumbnail' => false,
             'maxOnly' => false,
