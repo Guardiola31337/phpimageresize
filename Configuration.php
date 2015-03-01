@@ -3,6 +3,7 @@
 class Configuration {
     const CACHE_PATH = './cache/';
     const REMOTE_PATH = './cache/remote/';
+    const CONVERT_PATH = 'convert';
 
     const CACHE_KEY = 'cacheFolder';
     const REMOTE_KEY = 'remoteFolder';
@@ -11,7 +12,7 @@ class Configuration {
     const HEIGHT_KEY = 'height';
     const CROP_KEY = 'crop';
 
-    const CONVERT_PATH = 'convert';
+    const CROP_SIGNAL = '_cp';
 
     private $opts;
 
@@ -77,7 +78,7 @@ class Configuration {
     }
 
     public function obtainCropSignal() {
-        $cropSignal = isset($this->opts[self::CROP_KEY]) && $this->opts[self::CROP_KEY] == true ? "_cp" : "";
+        $cropSignal = isset($this->opts[self::CROP_KEY]) && $this->opts[self::CROP_KEY] == true ? self::CROP_SIGNAL : "";
         return $cropSignal;
     }
 
