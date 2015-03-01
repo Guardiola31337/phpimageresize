@@ -9,6 +9,7 @@ class Configuration {
     const CACHE_MINUTES_KEY = 'cache_http_minutes';
     const WIDTH_KEY = 'width';
     const HEIGHT_KEY = 'height';
+    const CROP_KEY = 'crop';
 
     const CONVERT_PATH = 'convert';
 
@@ -76,7 +77,7 @@ class Configuration {
     }
 
     public function obtainCropSignal() {
-        $cropSignal = isset($this->opts['crop']) && $this->opts['crop'] == true ? "_cp" : "";
+        $cropSignal = isset($this->opts[self::CROP_KEY]) && $this->opts[self::CROP_KEY] == true ? "_cp" : "";
         return $cropSignal;
     }
 
