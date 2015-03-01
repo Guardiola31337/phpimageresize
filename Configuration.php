@@ -21,7 +21,7 @@ class Configuration {
 
         $defaults = array(
             self::CROP_KEY => false,
-            'scale' => 'false',
+            'scale' => false,
             'thumbnail' => false,
             'maxOnly' => false,
             'canvas-color' => 'transparent',
@@ -82,7 +82,7 @@ class Configuration {
     }
 
     public function obtainScaleSignal() {
-        return '';
+        return isset($this->opts['scale']) && $this->opts['scale'] == true ? "_sc" : "";
     }
 
 }
