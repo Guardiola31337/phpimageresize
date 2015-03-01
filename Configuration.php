@@ -11,6 +11,7 @@ class Configuration {
     const WIDTH_KEY = 'width';
     const HEIGHT_KEY = 'height';
     const CROP_KEY = 'crop';
+    const SCALE_KEY = 'scale';
 
     const CROP_SIGNAL = '_cp';
 
@@ -21,7 +22,7 @@ class Configuration {
 
         $defaults = array(
             self::CROP_KEY => false,
-            'scale' => false,
+            self::SCALE_KEY => false,
             'thumbnail' => false,
             'maxOnly' => false,
             'canvas-color' => 'transparent',
@@ -82,7 +83,7 @@ class Configuration {
     }
 
     public function obtainScaleSignal() {
-        return isset($this->opts['scale']) && $this->opts['scale'] == true ? "_sc" : "";
+        return isset($this->opts[self::SCALE_KEY]) && $this->opts[self::SCALE_KEY] == true ? "_sc" : "";
     }
 
 }
