@@ -16,6 +16,7 @@ class Configuration {
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
     const WIDTH_SIGNAL = '_w';
+    const HEIGHT_SIGNAL = '_h';
 
     private $opts;
 
@@ -93,7 +94,7 @@ class Configuration {
     }
 
     public function obtainHeightSignal() {
-        return isset($this->opts[HEIGHT_KEY]) ? '_h'.$this->obtainHeight() : '';
+        return isset($this->opts[HEIGHT_KEY]) ? self::HEIGHT_SIGNAL.$this->obtainHeight() : '';
     }
 
 }
