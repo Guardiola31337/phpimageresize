@@ -75,4 +75,8 @@ class Configuration {
         return $opts;
     }
 
+    public function obtainCropSignal() {
+        return '';
+    }
+
 }
