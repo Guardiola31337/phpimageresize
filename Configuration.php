@@ -15,6 +15,7 @@ class Configuration {
 
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
+    const WIDTH_SIGNAL = '_w';
 
     private $opts;
 
@@ -88,7 +89,7 @@ class Configuration {
     }
 
     public function obtainWidthSignal() {
-        return isset($this->opts[self::WIDTH_KEY]) ? '_w'.$this->obtainWidth() : '';
+        return isset($this->opts[self::WIDTH_KEY]) ? self::WIDTH_SIGNAL.$this->obtainWidth() : '';
     }
 
 }
