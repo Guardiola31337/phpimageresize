@@ -34,13 +34,13 @@ class Configuration {
             'quality' => 90,
             'cache_http_minutes' => 20,
             self::WIDTH_KEY => null,
-            'height' => null);
+            self::HEIGHT_KEY => null);
 
         if(empty($opts)) {
             $opts = $defaults;
         }
 
-        if(empty($opts['output-filename']) && empty($opts['height']) && empty($opts[self::WIDTH_KEY])) {
+        if(empty($opts['output-filename']) && empty($opts[self::HEIGHT_KEY]) && empty($opts[self::WIDTH_KEY])) {
             throw new InvalidArgumentException;
         }
 
@@ -93,7 +93,7 @@ class Configuration {
     }
 
     public function obtainHeightSignal() {
-        return isset($this->opts['height']) ? '_h'.$this->obtainHeight() : '';
+        return isset($this->opts[HEIGHT_KEY]) ? '_h'.$this->obtainHeight() : '';
     }
 
 }
