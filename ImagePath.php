@@ -29,6 +29,10 @@ class ImagePath {
         return md5_file($this->path);
     }
 
+    public function obtainExtensionSignal() {
+        return '';
+    }
+
     public function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);
