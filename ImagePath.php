@@ -30,7 +30,7 @@ class ImagePath {
     }
 
     public function obtainExtensionSignal() {
-        return '';
+        return '.'.$this->obtainExtension();
     }
 
     public function obtainExtension() {
