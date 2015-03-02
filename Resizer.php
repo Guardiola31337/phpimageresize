@@ -58,7 +58,7 @@ class Resizer {
         $cropSignal = $this->configuration->obtainCropSignal();
         $scaleSignal = $this->configuration->obtainScaleSignal();
         $widthSignal = $this->configuration->obtainWidthSignal();
-        $heightSignal = !empty($h) ? '_h'.$h : '';
+        $heightSignal = $this->configuration->obtainHeightSignal();
         $extension = '.'.$ext;
 
         $newPath = $this->configuration->obtainCache() .$filename.$widthSignal.$heightSignal.$cropSignal.$scaleSignal.$extension;
