@@ -44,14 +44,6 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('a90d6abb5d7c3eccfdbb80507f5c6b51', $imagePath->obtainMD5());
     }
 
-    public function testObtainImageExtension() {
-        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
-
-        $imagePath = new ImagePath($url);
-
-        $this->assertEquals('jpg', $imagePath->obtainExtension());
-    }
-
     public function testObtainExtensionSignal() {
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 

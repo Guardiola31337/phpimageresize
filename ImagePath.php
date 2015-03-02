@@ -35,7 +35,7 @@ class ImagePath {
         return self::EXTENSION_SIGNAL .$this->obtainExtension();
     }
 
-    public function obtainExtension() {
+    private function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);
         return $finfo[self::EXTENSION_KEY];
