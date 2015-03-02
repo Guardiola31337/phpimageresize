@@ -55,7 +55,7 @@ class Resizer {
 
         $opts = $this->configuration->asHash();
 
-        $cropSignal = isset($opts['crop']) && $opts['crop'] == true ? "_cp" : "";
+        $cropSignal = $this->configuration->obtainCropSignal();
         $scaleSignal = isset($opts['scale']) && $opts['scale'] == true ? "_sc" : "";
         $widthSignal = !empty($w) ? '_w'.$w : '';
         $heightSignal = !empty($h) ? '_h'.$h : '';
