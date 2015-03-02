@@ -94,7 +94,7 @@ class Configuration {
     }
 
     public function obtainHeightSignal() {
-        return isset($this->opts[HEIGHT_KEY]) ? self::HEIGHT_SIGNAL.$this->obtainHeight() : '';
+        return isset($this->opts[self::HEIGHT_KEY]) ? self::HEIGHT_SIGNAL.$this->obtainHeight() : '';
     }
 
 }
