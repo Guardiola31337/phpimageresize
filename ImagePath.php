@@ -4,6 +4,8 @@ class ImagePath {
 
     const EXTENSION_KEY = 'extension';
 
+    const EXTENSION_SIGNAL = '.';
+
     private $path;
     private $valid_http_protocols = array('http', 'https');
 
@@ -30,7 +32,7 @@ class ImagePath {
     }
 
     public function obtainExtensionSignal() {
-        return '.'.$this->obtainExtension();
+        return self::EXTENSION_SIGNAL .$this->obtainExtension();
     }
 
     public function obtainExtension() {
