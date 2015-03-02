@@ -25,13 +25,12 @@ function isInCache($path, $imagePath) {
 function composeNewPath($imagePath, $configuration) {
     $opts = $configuration->asHash();
 	$filename = $imagePath->obtainMD5();
-	$ext = $imagePath->obtainExtension();
 
 	$cropSignal = $configuration->obtainCropSignal();
 	$scaleSignal = $configuration->obtainScaleSignal();
 	$widthSignal = $configuration->obtainWidthSignal();
 	$heightSignal = $configuration->obtainHeightSignal();
-	$extension = '.'.$ext;
+	$extension = $imagePath->obtainExtensionSignal();
 
 	$newPath = $configuration->obtainCache() .$filename.$widthSignal.$heightSignal.$cropSignal.$scaleSignal.$extension;
 
