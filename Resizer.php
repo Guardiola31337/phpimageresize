@@ -46,9 +46,6 @@ class Resizer {
     }
 
     public function composeNewPath() {
-        $w = $this->configuration->obtainWidth();
-        $h = $this->configuration->obtainHeight();
-
         $image = new ImagePath($this->path);
         $filename = $image->obtainMD5();
         $ext = $image->obtainExtension();
