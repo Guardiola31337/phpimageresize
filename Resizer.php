@@ -57,7 +57,7 @@ class Resizer {
 
         $cropSignal = $this->configuration->obtainCropSignal();
         $scaleSignal = $this->configuration->obtainScaleSignal();
-        $widthSignal = !empty($w) ? '_w'.$w : '';
+        $widthSignal = $this->configuration->obtainWidthSignal();
         $heightSignal = !empty($h) ? '_h'.$h : '';
         $extension = '.'.$ext;
 
