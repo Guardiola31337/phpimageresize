@@ -75,11 +75,6 @@ class Configuration {
     public function obtainCacheMinutes() {
         return $this->opts[self::CACHE_MINUTES_KEY];
     }
-    private function sanitize($opts) {
-        if($opts == null) return array();
-
-        return $opts;
-    }
 
     public function obtainCropSignal() {
         return isset($this->opts[self::CROP_KEY]) && $this->opts[self::CROP_KEY] == true ? self::CROP_SIGNAL : "";
@@ -95,6 +90,12 @@ class Configuration {
 
     public function obtainHeightSignal() {
         return isset($this->opts[self::HEIGHT_KEY]) ? self::HEIGHT_SIGNAL.$this->obtainHeight() : '';
+    }
+
+    private function sanitize($opts) {
+        if($opts == null) return array();
+
+        return $opts;
     }
 
 }
