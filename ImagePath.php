@@ -8,9 +8,11 @@ class ImagePath {
 
     private $path;
     private $valid_http_protocols = array('http', 'https');
+    private $cache;
 
-    public function __construct($url='') {
+    public function __construct($url='', $cache=null) {
         $this->path = $this->sanitize($url);
+        $this->cache = $cache;
     }
 
     public function sanitizedPath() {
