@@ -92,6 +92,10 @@ class Configuration {
         return isset($this->opts[self::HEIGHT_KEY]) ? self::HEIGHT_SIGNAL.$this->obtainHeight() : '';
     }
 
+    public function obtainOutputFilename() {
+        return 'output-filename';
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 
