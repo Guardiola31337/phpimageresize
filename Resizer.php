@@ -49,8 +49,6 @@ class Resizer {
         $image = new ImagePath($this->path);
         $filename = $image->obtainMD5();
 
-        $opts = $this->configuration->asHash();
-
         $cropSignal = $this->configuration->obtainCropSignal();
         $scaleSignal = $this->configuration->obtainScaleSignal();
         $widthSignal = $this->configuration->obtainWidthSignal();
@@ -59,8 +57,8 @@ class Resizer {
 
         $newPath = $this->configuration->obtainCache() .$filename.$widthSignal.$heightSignal.$cropSignal.$scaleSignal.$extension;
 
-        if($opts['output-filename']) {
-            $newPath = $opts['output-filename'];
+        if($this->configuration->obtainOutputFilename()) {
+            $newPath = $this->configuration->obtainOutputFilename();
         }
 
         return $newPath;
