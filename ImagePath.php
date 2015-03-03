@@ -11,6 +11,7 @@ class ImagePath {
     private $cache;
 
     public function __construct($url='', $cache=null) {
+        if ($cache == null) $cache = new FileSystem();
         $this->path = $this->sanitize($url);
         if (!($cache instanceof FileSystem)) throw new InvalidArgumentException();
         $this->cache = $cache;
