@@ -93,7 +93,7 @@ class Configuration {
     }
 
     public function obtainOutputFilename() {
-        return 'output-filename';
+        return $this->opts['output-filename'];
     }
 
     private function sanitize($opts) {
