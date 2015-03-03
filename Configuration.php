@@ -4,6 +4,7 @@ class Configuration {
     const CACHE_PATH = './cache/';
     const REMOTE_PATH = './cache/remote/';
     const CONVERT_PATH = 'convert';
+    const DEFAULT_OUTPUT_FILENAME = 'default-output-filename';
 
     const CACHE_KEY = 'cacheFolder';
     const REMOTE_KEY = 'remoteFolder';
@@ -22,6 +23,7 @@ class Configuration {
     private $opts;
 
 
+
     public function __construct($opts=array()) {
         $sanitized= $this->sanitize($opts);
 
@@ -31,7 +33,7 @@ class Configuration {
             'thumbnail' => false,
             'maxOnly' => false,
             'canvas-color' => 'transparent',
-            self::OUTPUT_FILENAME_KEY => 'default-output-filename',
+            self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
             'quality' => 90,
