@@ -97,4 +97,15 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('default-output-filename', $configuration->obtainOutputFilename());
     }
 
+    public function testObtainOutputFilename() {
+        $opts = array(
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'foo-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('foo-output-filename', $configuration->obtainOutputFilename());
+    }
+
 }
