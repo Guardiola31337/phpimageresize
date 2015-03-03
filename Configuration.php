@@ -12,6 +12,7 @@ class Configuration {
     const HEIGHT_KEY = 'height';
     const CROP_KEY = 'crop';
     const SCALE_KEY = 'scale';
+    const OUTPUT_FILENAME_KEY = 'output-filename';
 
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
@@ -19,6 +20,7 @@ class Configuration {
     const HEIGHT_SIGNAL = '_h';
 
     private $opts;
+
 
     public function __construct($opts=array()) {
         $sanitized= $this->sanitize($opts);
@@ -29,7 +31,7 @@ class Configuration {
             'thumbnail' => false,
             'maxOnly' => false,
             'canvas-color' => 'transparent',
-            'output-filename' => 'default-output-filename',
+            self::OUTPUT_FILENAME_KEY => 'default-output-filename',
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
             'quality' => 90,
@@ -41,7 +43,7 @@ class Configuration {
             $opts = $defaults;
         }
 
-        if(empty($opts['output-filename']) && empty($opts[self::HEIGHT_KEY]) && empty($opts[self::WIDTH_KEY])) {
+        if(empty($opts[self::OUTPUT_FILENAME_KEY]) && empty($opts[self::HEIGHT_KEY]) && empty($opts[self::WIDTH_KEY])) {
             throw new InvalidArgumentException;
         }
 
@@ -93,7 +95,7 @@ class Configuration {
     }
 
     public function obtainOutputFilename() {
-        return $this->opts['output-filename'];
+        return $this->opts[self::OUTPUT_FILENAME_KEY];
     }
 
     private function sanitize($opts) {
