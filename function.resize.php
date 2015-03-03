@@ -23,7 +23,6 @@ function isInCache($path, $imagePath) {
 }
 
 function composeNewPath($imagePath, $configuration) {
-    $opts = $configuration->asHash();
 	$filename = $imagePath->obtainMD5();
 
 	$cropSignal = $configuration->obtainCropSignal();
@@ -34,8 +33,8 @@ function composeNewPath($imagePath, $configuration) {
 
 	$newPath = $configuration->obtainCache() .$filename.$widthSignal.$heightSignal.$cropSignal.$scaleSignal.$extension;
 
-	if($opts['output-filename']) {
-		$newPath = $opts['output-filename'];
+	if($configuration->obtainOutputFilename()) {
+		$newPath = $configuration->obtainOutputFilename();
 	}
 
 	return $newPath;
