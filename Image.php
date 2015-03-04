@@ -17,7 +17,7 @@ class Image {
         $this->path = $this->sanitize($url);
         $this->checkCache($cache);
         $this->cache = $cache;
-        if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
+        $this->checkConfiguration($configuration);
         $this->configuration = $configuration;
     }
 
@@ -65,5 +65,9 @@ class Image {
 
     private function checkCache($cache) {
         if (!($cache instanceof FileSystem)) throw new InvalidArgumentException();
+    }
+
+    private function checkConfiguration($configuration){
+        if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
     }
 }
