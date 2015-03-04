@@ -16,6 +16,7 @@ class Image {
         $this->path = $this->sanitize($url);
         $this->checkCache($cache);
         $this->cache = $cache;
+        if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
         $this->configuration = $configuration;
     }
 
