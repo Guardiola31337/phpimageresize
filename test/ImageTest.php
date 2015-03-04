@@ -107,4 +107,18 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
     }
 
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testFilePathDoesNotExist() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $configuration = new Configuration();
+        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
+
+        $image->obtainFilePath();
+    }
+
 }
