@@ -31,7 +31,7 @@ class Image {
 
     public function obtainFileName() {
         $finfo = pathinfo($this->path);
-        list($filename) = explode('?',$finfo['basename']);
+        list($filename) = explode('?', $finfo['basename']);
         return $filename;
     }
 
@@ -44,7 +44,20 @@ class Image {
     }
 
     public function obtainFilePath() {
-        return '';
+        $imagePath = '';
+
+        if($this->isHttpProtocol()):
+            $filename = $this->obtainFileName();
+            $local_filepath = $this->configuration->obtainRemote() .$filename;
+            $inCache = $this->isInCache($local_filepath);
+
+            if(!$inCache):
+                $this->download($local_filepath);
+            endif;
+            $imagePath = $local_filepath;
+        endif;
+
+        return $imagePath;
     }
 
     private function obtainExtension() {
@@ -69,5 +82,22 @@ class Image {
 
     private function checkConfiguration($configuration){
         if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
+    }
+
+    private function isInCache($filePath) {
+        $fileExists = $this->cache->file_exists($filePath);
+        $fileValid = $this->fileNotExpired($filePath);
+
+        return $fileExists && $fileValid;
+    }
+
+    private function fileNotExpired($filePath) {
+        $cacheMinutes = $this->configuration->obtainCacheMinutes();
+        $this->cache->filemtime($filePath) < strtotime('+'. $cacheMinutes. ' minutes');
+    }
+
+    private function download($filePath) {
+        $img = $this->cache->file_get_contents($this->path);
+        $this->cache->file_put_contents($filePath, $img);
     }
 }

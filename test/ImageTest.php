@@ -80,12 +80,15 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testObtainLocallyCachedFilePath() {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_get_contents')
+            ->willReturn('foo');
 
-        $image = new Image($url);
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $configuration = new Configuration();
+        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
 
         $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
     }
