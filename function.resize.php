@@ -123,21 +123,19 @@ function doResize($image, $newPath, $configuration) {
 	}
 }
 
-function resize($originalImage,$opts=null){
-	$path = new Image($originalImage);
-
+function resize($originalImage, $opts=null){
 	try {
 		$configuration = new Configuration($opts);
 	} catch (InvalidArgumentException $e) {
 		return 'needed more arguments for resize';
 	}
 
-	$resizer = new Resizer($path, $configuration);
+	$image = new Image($originalImage, $configuration);
 
 	// This has to be done in resizer resize
 
 	try {
-		$originalImage = $resizer->obtainFilePath();
+		$originalImage = $image->obtainFilePath();
 	} catch (Exception $e) {
 		return 'image not found';
 	}
