@@ -13,6 +13,7 @@ class Image {
 
     public function __construct($url='', $cache=null, $configuration=null) {
         if ($cache == null) $cache = new FileSystem();
+        if ($configuration == null) $configuration = new Configuration();
         $this->path = $this->sanitize($url);
         $this->checkCache($cache);
         $this->cache = $cache;
