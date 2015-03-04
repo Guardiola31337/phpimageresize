@@ -10,6 +10,12 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $imagePath = new ImagePath('', 'nonCacheObject');
     }
 
+    public function testInstantiation() {
+        $this->assertInstanceOf('ImagePath', new ImagePath());
+        $this->assertInstanceOf('ImagePath', new ImagePath(''));
+        $this->assertInstanceOf('ImagePath', new ImagePath('', new FileSystem()));
+    }
+
     public function testIsSanitizedAtInstantiation() {
         $url = 'https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#safe=off&q=php%20define%20dictionary';
         $expected = 'https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#safe=off&q=php define dictionary';
