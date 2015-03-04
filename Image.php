@@ -57,6 +57,13 @@ class Image {
             $imagePath = $local_filepath;
         endif;
 
+        if(!$this->cache->file_exists($imagePath)):
+            $imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath;
+            if(!$this->cache->file_exists($imagePath)):
+                throw new RuntimeException();
+            endif;
+        endif;
+
         return $imagePath;
     }
 

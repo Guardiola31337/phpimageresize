@@ -114,7 +114,7 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
-            ->willReturn(true);
+            ->willReturn(false);
         $configuration = new Configuration();
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
 
