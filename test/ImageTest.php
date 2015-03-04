@@ -21,6 +21,7 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Image', new Image());
         $this->assertInstanceOf('Image', new Image(''));
         $this->assertInstanceOf('Image', new Image('', new FileSystem()));
+        $this->assertInstanceOf('Image', new Image('', new FileSystem(), new Configuration()));
     }
 
     public function testIsSanitizedAtInstantiation() {
