@@ -1,6 +1,6 @@
 <?php
 
-class ImagePath {
+class Image {
 
     const EXTENSION_KEY = 'extension';
 

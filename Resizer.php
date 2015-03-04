@@ -46,7 +46,7 @@ class Resizer {
     }
 
     public function composeNewPath() {
-        $image = new ImagePath($this->path);
+        $image = new Image($this->path);
         $filename = $image->obtainMD5();
 
         $cropSignal = $this->configuration->obtainCropSignal();
@@ -83,7 +83,7 @@ class Resizer {
     }
 
     private function checkPath($path) {
-        if (!($path instanceof ImagePath)) throw new InvalidArgumentException();
+        if (!($path instanceof Image)) throw new InvalidArgumentException();
     }
 
     private function checkConfiguration($configuration) {
