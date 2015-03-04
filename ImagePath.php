@@ -13,7 +13,7 @@ class ImagePath {
     public function __construct($url='', $cache=null) {
         if ($cache == null) $cache = new FileSystem();
         $this->path = $this->sanitize($url);
-        if (!($cache instanceof FileSystem)) throw new InvalidArgumentException();
+        $this->checkCache($cache);
         $this->cache = $cache;
     }
 
@@ -53,5 +53,9 @@ class ImagePath {
         if ($this->path == '') return '';
         $purl = parse_url($this->path);
         return $purl['scheme'];
+    }
+
+    private function checkCache($cache) {
+        if (!($cache instanceof FileSystem)) throw new InvalidArgumentException();
     }
 }
