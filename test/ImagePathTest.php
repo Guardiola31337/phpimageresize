@@ -25,6 +25,12 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $imagePath->sanitizedPath());
     }
 
+    public function testNullImageIsSanitizedAtInstantiation() {
+        $imagePath = new ImagePath(null);
+
+        $this->assertEquals('', $imagePath->sanitizedPath());
+    }
+
     public function testIsHttpProtocol() {
         $url = 'https://example.com';
 
