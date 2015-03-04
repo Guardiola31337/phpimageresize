@@ -71,4 +71,12 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('.jpg', $image->obtainExtensionSignal());
     }
 
+    public function testObtainLocallyCachedFilePath() {
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $image = new Image($url);
+
+        $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
+    }
+
 }
