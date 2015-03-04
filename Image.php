@@ -9,12 +9,14 @@ class Image {
     private $path;
     private $valid_http_protocols = array('http', 'https');
     private $cache;
+    private $configuration;
 
-    public function __construct($url='', $cache=null) {
+    public function __construct($url='', $cache=null, $configuration=null) {
         if ($cache == null) $cache = new FileSystem();
         $this->path = $this->sanitize($url);
         $this->checkCache($cache);
         $this->cache = $cache;
+        $this->configuration = $configuration;
     }
 
     public function sanitizedPath() {

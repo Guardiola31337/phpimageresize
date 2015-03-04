@@ -6,8 +6,15 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testOptionalCollaboration() {
+    public function testOptionalCacheCollaboration() {
         $image = new Image('', 'nonCacheObject');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testOptionalConfigurationCollaboration() {
+        $image = new Image('', new FileSystem(), 'nonConfigurationObject');
     }
 
     public function testInstantiation() {
@@ -72,6 +79,9 @@ class ImagePathTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testObtainLocallyCachedFilePath() {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
         $image = new Image($url);
