@@ -100,6 +100,10 @@ class Configuration {
         return $this->opts[self::OUTPUT_FILENAME_KEY];
     }
 
+    public function obtainSignals() {
+        return '';
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 

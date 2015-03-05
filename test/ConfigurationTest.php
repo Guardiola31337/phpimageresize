@@ -108,4 +108,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foo-output-filename', $configuration->obtainOutputFilename());
     }
 
+    public function testObtainSignals() {
+        $opts = array(
+            'width' => 20,
+            'height' => 30,
+            'crop' => true,
+            'scale' => true
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertEquals('_w20_h30_cp_sc', $configuration->obtainSignals());
+    }
+
 }
