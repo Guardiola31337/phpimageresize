@@ -101,7 +101,11 @@ class Configuration {
     }
 
     public function obtainSignals() {
-        return '';
+        $widthSignal = $this->obtainWidthSignal();
+        $heightSignal = $this->obtainHeightSignal();
+        $cropSignal = $this->obtainCropSignal();
+        $scaleSignal = $this->obtainScaleSignal();
+        return $widthSignal.$heightSignal.$cropSignal.$scaleSignal;
     }
 
     private function sanitize($opts) {

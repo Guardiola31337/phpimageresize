@@ -110,8 +110,8 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
     public function testObtainSignals() {
         $opts = array(
-            'width' => 20,
-            'height' => 30,
+            'width' => '20',
+            'height' => '30',
             'crop' => true,
             'scale' => true
         );
