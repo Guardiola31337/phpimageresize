@@ -105,6 +105,7 @@ class Configuration {
         $heightSignal = $this->obtainHeightSignal();
         $cropSignal = $this->obtainCropSignal();
         $scaleSignal = $this->obtainScaleSignal();
+
         return $widthSignal.$heightSignal.$cropSignal.$scaleSignal;
     }
 
