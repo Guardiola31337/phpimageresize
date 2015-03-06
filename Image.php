@@ -68,6 +68,11 @@ class Image {
     }
 
     public function composePath() {
+        if ($this->configuration->obtainOutputFilename()) {
+            $newPath = $this->configuration->obtainOutputFilename();
+            return $newPath;
+        }
+
         return '';
     }
 
