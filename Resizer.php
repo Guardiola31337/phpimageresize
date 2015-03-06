@@ -17,14 +17,11 @@ class Resizer {
     public function composeNewPath() {
         $image = new Image($this->path);
         $filename = $image->obtainMD5();
-
-        $cropSignal = $this->configuration->obtainCropSignal();
-        $scaleSignal = $this->configuration->obtainScaleSignal();
-        $widthSignal = $this->configuration->obtainWidthSignal();
-        $heightSignal = $this->configuration->obtainHeightSignal();
         $extension = $image->obtainExtensionSignal();
 
-        $newPath = $this->configuration->obtainCache() .$filename.$widthSignal.$heightSignal.$cropSignal.$scaleSignal.$extension;
+        $confSignals = $this->configuration->obtainSignals();
+
+        $newPath = $this->configuration->obtainCache() .$filename.$confSignals.$extension;
 
         if($this->configuration->obtainOutputFilename()) {
             $newPath = $this->configuration->obtainOutputFilename();
