@@ -14,23 +14,6 @@ class Resizer {
         $this->path = $path;
     }
 
-    public function composePath() {
-        if ($this->configuration->obtainOutputFilename()) {
-            $newPath = $this->configuration->obtainOutputFilename();
-            return $newPath;
-        }
-
-        $image = new Image($this->path);
-        $filename = $image->obtainMD5();
-        $extension = $image->obtainExtensionSignal();
-
-        $confSignals = $this->configuration->obtainSignals();
-
-        $newPath = $this->configuration->obtainCache() .$filename.$confSignals.$extension;
-
-        return $newPath;
-    }
-
     private function checkConfiguration($configuration) {
         if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
     }
