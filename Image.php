@@ -36,7 +36,7 @@ class Image {
     }
 
     public function obtainMD5() {
-        return md5_file($this->path);
+        return $this->cache->md5_file($this->path);
     }
 
     public function obtainExtensionSignal() {

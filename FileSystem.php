@@ -18,4 +18,8 @@ class FileSystem {
         return filemtime($filename);
     }
 
+    public function md5_file($filename) {
+        return md5_file($filename);
+    }
+
 }

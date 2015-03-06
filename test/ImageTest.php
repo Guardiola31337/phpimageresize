@@ -65,9 +65,13 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testObtainImageMD5() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
-        $image = new Image($url);
+        $image = new Image($url, $cache);
 
         $this->assertEquals('a90d6abb5d7c3eccfdbb80507f5c6b51', $image->obtainMD5());
     }
