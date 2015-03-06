@@ -2,7 +2,7 @@
 require_once 'Image.php';
 date_default_timezone_set('Europe/Berlin');
 
-class ImagePathTest extends PHPUnit_Framework_TestCase {
+class ImageTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @expectedException InvalidArgumentException
