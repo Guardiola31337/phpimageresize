@@ -27,7 +27,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $configuration = new Configuration($opts);
         $resizer = new Resizer('', $configuration);
 
-        $this->assertEquals('foo-output-filename', $resizer->composeNewPath());
+        $this->assertEquals('foo-output-filename', $resizer->composePath());
     }
 
 }
