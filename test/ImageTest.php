@@ -126,4 +126,16 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $image->obtainFilePath();
     }
 
+    public function testComposePathWithOutputFilename() {
+        $opts = array(
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'foo-output-filename'
+        );
+        $configuration = new Configuration($opts);
+        $image = new Image('', null, $configuration);
+
+        $this->assertEquals('foo-output-filename', $image->composePath());
+    }
+
 }

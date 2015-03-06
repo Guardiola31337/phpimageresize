@@ -67,6 +67,10 @@ class Image {
         return $imagePath;
     }
 
+    public function composePath() {
+        return '';
+    }
+
     private function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);
