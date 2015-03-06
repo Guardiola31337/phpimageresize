@@ -73,7 +73,14 @@ class Image {
             return $newPath;
         }
 
-        return '';
+        $filename = $this->obtainMD5();
+        $extension = $this->obtainExtensionSignal();
+
+        $confSignals = $this->configuration->obtainSignals();
+
+        $newPath = $this->configuration->obtainCache() .$filename.$confSignals.$extension;
+
+        return $newPath;
     }
 
     private function obtainExtension() {
