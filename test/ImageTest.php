@@ -138,4 +138,22 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('foo-output-filename', $image->composePath());
     }
 
+    public function testComposePath() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+        $configuration = new Configuration($opts);
+        $image = new Image($url, $cache, $configuration);
+
+        $this->assertEquals('./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg', $image->composePath());
+    }
+
 }
