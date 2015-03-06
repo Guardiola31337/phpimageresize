@@ -15,6 +15,11 @@ class Resizer {
     }
 
     public function composeNewPath() {
+        if ($this->configuration->obtainOutputFilename()) {
+            $newPath = $this->configuration->obtainOutputFilename();
+            return $newPath;
+        }
+
         $image = new Image($this->path);
         $filename = $image->obtainMD5();
         $extension = $image->obtainExtensionSignal();
@@ -22,10 +27,6 @@ class Resizer {
         $confSignals = $this->configuration->obtainSignals();
 
         $newPath = $this->configuration->obtainCache() .$filename.$confSignals.$extension;
-
-        if($this->configuration->obtainOutputFilename()) {
-            $newPath = $this->configuration->obtainOutputFilename();
-        }
 
         return $newPath;
     }
