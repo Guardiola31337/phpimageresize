@@ -131,14 +131,11 @@ function resize($originalImage, $opts=null){
 
 	// This has to be done in resizer resize
 
-	try {
-		$originalImage = $image->obtainFilePath();
-	} catch (Exception $e) {
-		return 'image not found';
-	}
-
-
-	$newPath = composeNewPath($originalImage, $configuration);
+    try {
+        $newPath = $image->composePath();
+    } catch (Exception $e) {
+        return 'image not found';
+    }
 
     $create = !isInCache($newPath, $originalImage);
 
