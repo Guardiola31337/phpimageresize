@@ -4,10 +4,6 @@ require 'ImagePath.php';
 require 'Configuration.php';
 require 'Resizer.php';
 
-function sanitize($path) {
-	return urldecode($path);
-}
-
 function isInCache($path, $image) {
 	$isInCache = false;
 	if(file_exists($path) == true):
@@ -20,21 +16,6 @@ function isInCache($path, $image) {
 	endif;
 
 	return $isInCache;
-}
-
-function composeNewPath($image, $configuration) {
-	$filename = $image->obtainMD5();
-	$extension = $image->obtainExtensionSignal();
-
-    $confSignals = $configuration->obtainSignals();
-
-	$newPath = $configuration->obtainCache() .$filename.$confSignals.$extension;
-
-	if($configuration->obtainOutputFilename()) {
-		$newPath = $configuration->obtainOutputFilename();
-	}
-
-	return $newPath;
 }
 
 function defaultShellCommand($configuration, $image, $newPath) {
