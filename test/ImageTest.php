@@ -84,7 +84,7 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('.jpg', $image->obtainExtensionSignal());
     }
 
-    public function testObtainLocallyCachedFilePath() {
+    public function testComposePathLocallyCached() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_get_contents')
@@ -92,13 +92,20 @@ class ImageTest extends PHPUnit_Framework_TestCase {
 
         $cache->method('file_exists')
             ->willReturn(true);
-        $configuration = new Configuration();
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
+        $opts = array(
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+        $configuration = new Configuration($opts);
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
 
-        $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
+        $this->assertEquals('./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg', $image->composePath());
     }
 
-    public function testLocallyCachedFilePathFail() {
+    public function testComposePathLocallyCachedFail() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
@@ -109,13 +116,13 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $configuration = new Configuration();
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
 
-        $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
+        $this->assertEquals('default-output-filename', $image->composePath());
     }
 
     /**
      * @expectedException RuntimeException
      */
-    public function testFilePathDoesNotExist() {
+    public function testComposePathFileDoesNotExist() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
@@ -123,17 +130,23 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $configuration = new Configuration();
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
 
-        $image->obtainFilePath();
+        $image->composePath();
     }
 
     public function testComposePathWithOutputFilename() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
         $opts = array(
             'width' => null,
             'height' => null,
             'output-filename' => 'foo-output-filename'
         );
         $configuration = new Configuration($opts);
-        $image = new Image('', null, $configuration);
+        $image = new Image($url, $cache, $configuration);
 
         $this->assertEquals('foo-output-filename', $image->composePath());
     }
@@ -141,6 +154,8 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     public function testComposePath() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
         $cache->method('md5_file')
             ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
