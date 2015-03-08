@@ -43,30 +43,6 @@ class Image {
         return self::EXTENSION_SIGNAL .$this->obtainExtension();
     }
 
-    public function obtainFilePath() {
-        $imagePath = '';
-
-        if($this->isHttpProtocol()):
-            $filename = $this->obtainFileName();
-            $local_filepath = $this->configuration->obtainRemote() .$filename;
-            $inCache = $this->isInCache($local_filepath);
-
-            if(!$inCache):
-                $this->download($local_filepath);
-            endif;
-            $imagePath = $local_filepath;
-        endif;
-
-        if(!$this->cache->file_exists($imagePath)):
-            $imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath;
-            if(!$this->cache->file_exists($imagePath)):
-                throw new RuntimeException();
-            endif;
-        endif;
-
-        return $imagePath;
-    }
-
     public function assignFilePath() {
         $imagePath = '';
 
