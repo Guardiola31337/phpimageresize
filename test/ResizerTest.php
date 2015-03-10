@@ -31,4 +31,11 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $resizer = new Resizer('', null, $opts);
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidImageInstantiation() {
+        $resizer = new Resizer('', 'nonCacheObject');
+    }
+
 }
