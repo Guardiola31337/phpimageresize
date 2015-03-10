@@ -77,7 +77,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
-    public function testObtainPathAfterCompose() {
+    public function testObtainOrignalPathAfterObtainingImage() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
@@ -93,7 +93,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer->obtainImage();
 
-        $this->assertEquals('./cache/remote/mf.jpg', $resizer->obtainPath());
+        $this->assertEquals('./cache/remote/mf.jpg', $resizer->obtainOriginalPath());
 
     }
 

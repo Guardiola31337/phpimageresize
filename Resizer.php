@@ -21,7 +21,7 @@ class Resizer {
         return $this->image->obtainFilePath();
     }
 
-    public function obtainPath() {
+    public function obtainOriginalPath() {
         return $this->image->sanitizedPath();
     }
 
