@@ -108,7 +108,7 @@ function resize($originalImage, $opts=null){
 		return 'needed more arguments for resize';
 	}
 
-	$image = new Image($originalImage, $configuration);
+	$image = new Image($originalImage, null, $configuration);
 
 	// This has to be done in resizer resize
 
