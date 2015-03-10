@@ -22,7 +22,7 @@ class Resizer {
     }
 
     public function obtainPath() {
-        return '';
+        return $this->image->sanitizedPath();
     }
 
     private function checkOptions($opts) {
