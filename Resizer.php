@@ -14,7 +14,7 @@ class Resizer {
     }
 
     public function obtainImage() {
-        return '';
+        return $this->image->composePath();
     }
 
     private function checkOptions($opts) {
