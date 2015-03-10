@@ -1,6 +1,6 @@
 <?php
 
-require 'ImagePath.php';
+require 'Image.php';
 require 'Configuration.php';
 require 'Resizer.php';
 
