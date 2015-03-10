@@ -13,6 +13,10 @@ class Resizer {
         $this->instantiateImage($url, $cache, $this->configuration);
     }
 
+    public function obtainImage() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
