@@ -1,5 +1,7 @@
 <?php
 
+require 'FileSystem.php';
+
 class Image {
 
     const EXTENSION_KEY = 'extension';

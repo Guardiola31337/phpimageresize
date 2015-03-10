@@ -8,14 +8,14 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testOptionalConfigurationCollaboration() {
-        $resizer = new Resizer('', 'nonConfigurationObject');
+    public function testInvalidOptionsCollaboration() {
+        $resizer = new Resizer('', 'nonOptionsObject');
     }
 
     public function testInstantiation() {
         $this->assertInstanceOf('Resizer', new Resizer());
         $this->assertInstanceOf('Resizer', new Resizer(''));
-        $this->assertInstanceOf('Resizer', new Resizer('', new Configuration()));
+        $this->assertInstanceOf('Resizer', new Resizer('', array()));
     }
 
 }

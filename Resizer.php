@@ -1,21 +1,13 @@
 <?php
 
-require 'FileSystem.php';
-
 class Resizer {
 
     private $path;
-    private $configuration;
+    private $opts;
 
-    public function __construct($path='', $configuration=null) {
-        if ($configuration == null) $configuration = new Configuration();
-        $this->checkConfiguration($configuration);
-        $this->configuration = $configuration;
+    public function __construct($path='', $opts=array()) {
         $this->path = $path;
-    }
-
-    private function checkConfiguration($configuration) {
-        if (!($configuration instanceof Configuration)) throw new InvalidArgumentException();
+        $this->opts = $opts;
     }
 
 }
