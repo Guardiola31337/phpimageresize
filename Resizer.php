@@ -17,6 +17,10 @@ class Resizer {
         return $this->image->composePath();
     }
 
+    public function obtainImagePath() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
