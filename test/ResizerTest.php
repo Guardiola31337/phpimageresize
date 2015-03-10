@@ -8,22 +8,15 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testInvalidCacheCollaboration() {
-        $resizer = new Resizer('', 'nonCacheObject');
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testInvalidOptionsCollaboration() {
-        $image = new Image('', new FileSystem(), 'nonConfigurationObject');
+        $image = new Image('', null, 'nonConfigurationObject');
     }
 
     public function testInstantiation() {
         $this->assertInstanceOf('Resizer', new Resizer());
         $this->assertInstanceOf('Resizer', new Resizer(''));
-        $this->assertInstanceOf('Resizer', new Resizer('', new FileSystem()));
-        $this->assertInstanceOf('Resizer', new Resizer('', new FileSystem(), array()));
+        $this->assertInstanceOf('Resizer', new Resizer('', null));
+        $this->assertInstanceOf('Resizer', new Resizer('', null, array()));
     }
 
     /**
@@ -35,7 +28,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
             'height' => '',
             'output-filename' => ''
         );
-        $resizer = new Resizer('', $opts);
+        $resizer = new Resizer('', null, $opts);
     }
 
 }

@@ -3,10 +3,12 @@
 class Resizer {
 
     private $path;
+    private $cache;
     private $configuration;
 
-    public function __construct($path='', $opts=array()) {
+    public function __construct($path='', $cache=null, $opts=array()) {
         $this->path = $path;
+        $this->cache = $cache;
         $this->checkOptions($opts);
         $this->instantiateConfiguration($opts);
     }
