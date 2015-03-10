@@ -120,4 +120,85 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('_w20_h30_cp_sc', $configuration->obtainSignals());
     }
 
+    public function testOpts() {
+        $this->assertInstanceOf('Configuration', new Configuration);
+    }
+
+    public function testNullOptsDefaults() {
+        $defaults = array(
+            'crop' => false,
+            'scale' => false,
+            'thumbnail' => false,
+            'maxOnly' => false,
+            'canvas-color' => 'transparent',
+            'output-filename' => 'default-output-filename',
+            'cacheFolder' => './cache/',
+            'remoteFolder' => './cache/remote/',
+            'quality' => 90,
+            'cache_http_minutes' => 20,
+            'width' => null,
+            'height' => null
+        );
+        $configuration = new Configuration(null);
+
+        $this->assertEquals($defaults, $configuration->asHash());
+    }
+
+    public function testDefaults() {
+        $defaults = array(
+            'crop' => false,
+            'scale' => false,
+            'thumbnail' => false,
+            'maxOnly' => false,
+            'canvas-color' => 'transparent',
+            'output-filename' => 'default-output-filename',
+            'cacheFolder' => './cache/',
+            'remoteFolder' => './cache/remote/',
+            'quality' => 90,
+            'cache_http_minutes' => 20,
+            'width' => null,
+            'height' => null
+        );
+        $configuration = new Configuration();
+
+        $asHash = $configuration->asHash();
+
+        $this->assertEquals($defaults, $asHash);
+    }
+
+    public function testDefaultsNotOverwriteConfiguration() {
+
+        $opts = array(
+            'thumbnail' => true,
+            'maxOnly' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+
+        $configuration = new Configuration($opts);
+        $configured = $configuration->asHash();
+
+        $this->assertTrue($configured['thumbnail']);
+        $this->assertTrue($configured['maxOnly']);
+    }
+
+    public function testObtainCache() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('./cache/', $configuration->obtainCache());
+    }
+
+    public function testObtainRemote() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('./cache/remote/', $configuration->obtainRemote());
+    }
+
+    public function testObtainConvertPath() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('convert', $configuration->obtainConvertPath());
+    }
+
 }
