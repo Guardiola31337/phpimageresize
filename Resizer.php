@@ -18,8 +18,7 @@ class Resizer {
     }
 
     public function obtainImagePath() {
-        $this->image->assignFilePath();
-        return $this->image->sanitizedPath();
+        return $this->image->obtainFilePath();
     }
 
     private function checkOptions($opts) {

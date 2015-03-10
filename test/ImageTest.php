@@ -84,19 +84,17 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('.jpg', $image->obtainExtensionSignal());
     }
 
-    public function testAssignFilePathLocallyCached() {
+    public function testObtainFilePathLocallyCached() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
             ->willReturn(true);
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $image->assignFilePath();
-
-        $this->assertEquals('./cache/remote/mf.jpg', $image->sanitizedPath());
+        $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
     }
 
-    public function testAssignFilePathLocallyCachedFail() {
+    public function testObtainFilePathLocallyCachedFail() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
@@ -106,22 +104,20 @@ class ImageTest extends PHPUnit_Framework_TestCase {
             ->willReturn(21 * 60);
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $image->assignFilePath();
-
-        $this->assertEquals('./cache/remote/mf.jpg', $image->sanitizedPath());
+        $this->assertEquals('./cache/remote/mf.jpg', $image->obtainFilePath());
     }
 
     /**
      * @expectedException RuntimeException
      */
-    public function testAssignFilePathFileDoesNotExist() {
+    public function testObtainFilePathFileDoesNotExist() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
             ->willReturn(false);
         $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $image->assignFilePath();
+        $image->obtainFilePath();
     }
 
     public function testComposePathWithOutputFilename() {

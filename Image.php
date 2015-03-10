@@ -45,7 +45,7 @@ class Image {
         return self::EXTENSION_SIGNAL .$this->obtainExtension();
     }
 
-    public function assignFilePath() {
+    public function obtainFilePath() {
         $imagePath = '';
 
         if($this->isHttpProtocol()):
@@ -66,11 +66,11 @@ class Image {
             endif;
         endif;
 
-        $this->path = $imagePath;
+        return $imagePath;
     }
 
     public function composePath() {
-        $this->assignFilePath();
+        $this->path = $this->obtainFilePath();
 
         if ($this->configuration->obtainOutputFilename()) {
             $newPath = $this->configuration->obtainOutputFilename();
