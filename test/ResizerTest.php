@@ -18,4 +18,16 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Resizer', new Resizer('', array()));
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidOptions() {
+        $opts = array(
+            'width' => '',
+            'height' => '',
+            'output-filename' => ''
+        );
+        $resizer = new Resizer('', $opts);
+    }
+
 }
