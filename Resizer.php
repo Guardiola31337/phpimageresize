@@ -2,15 +2,15 @@
 
 class Resizer {
 
-    private $path;
     private $cache;
     private $configuration;
+    private $image;
 
-    public function __construct($path='', $cache=null, $opts=array()) {
-        $this->path = $path;
+    public function __construct($url='', $cache=null, $opts=array()) {
         $this->cache = $cache;
         $this->checkOptions($opts);
         $this->instantiateConfiguration($opts);
+        $this->instantiateImage($url, $cache, $this->configuration);
     }
 
     private function checkOptions($opts) {
@@ -19,7 +19,15 @@ class Resizer {
 
     private function instantiateConfiguration($opts) {
         try {
-            $configuration = new Configuration($opts);
+            $this->configuration = new Configuration($opts);
+        } catch (InvalidArgumentException $e) {
+            throw new InvalidArgumentException;
+        }
+    }
+
+    private function instantiateImage($url, $cache, $configuration) {
+        try {
+            $this->image = new Image($url, $cache, $configuration);
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException;
         }
