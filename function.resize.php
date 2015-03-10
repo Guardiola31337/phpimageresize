@@ -118,6 +118,8 @@ function resize($originalImage, $opts=null){
         return 'image not found';
     }
 
+	$originalImage = $image->sanitizedPath();
+
     $create = !isInCache($newPath, $originalImage);
 
 	if($create == true):
