@@ -77,4 +77,24 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testObtainPathAfterCompose() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+        $opts = array(
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $resizer->obtainImage();
+
+        $this->assertEquals('./cache/remote/mf.jpg', $resizer->obtainPath());
+
+    }
+
 }

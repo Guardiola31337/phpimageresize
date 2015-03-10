@@ -21,6 +21,10 @@ class Resizer {
         return $this->image->obtainFilePath();
     }
 
+    public function obtainPath() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
