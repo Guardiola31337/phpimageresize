@@ -84,28 +84,19 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('.jpg', $image->obtainExtensionSignal());
     }
 
-    public function testComposePathLocallyCached() {
+    public function testAssignFilePathLocallyCached() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
-        $cache->method('file_get_contents')
-            ->willReturn('foo');
-
         $cache->method('file_exists')
             ->willReturn(true);
-        $cache->method('md5_file')
-            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
-        $opts = array(
-            'width' => '30',
-            'height' => '20',
-            'output-filename' => null
-        );
-        $configuration = new Configuration($opts);
-        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
+        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $this->assertEquals('./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg', $image->composePath());
+        $image->assignFilePath();
+
+        $this->assertEquals('./cache/remote/mf.jpg', $image->sanitizedPath());
     }
 
-    public function testComposePathLocallyCachedFail() {
+    public function testAssignFilePathLocallyCachedFail() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
@@ -113,24 +104,24 @@ class ImageTest extends PHPUnit_Framework_TestCase {
 
         $cache->method('filemtime')
             ->willReturn(21 * 60);
-        $configuration = new Configuration();
-        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
+        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $this->assertEquals('default-output-filename', $image->composePath());
+        $image->assignFilePath();
+
+        $this->assertEquals('./cache/remote/mf.jpg', $image->sanitizedPath());
     }
 
     /**
      * @expectedException RuntimeException
      */
-    public function testComposePathFileDoesNotExist() {
+    public function testAssignFilePathFileDoesNotExist() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
         $cache->method('file_exists')
             ->willReturn(false);
-        $configuration = new Configuration();
-        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, $configuration);
+        $image = new Image('http://martinfowler.com/mf.jpg?query=hello&s=fowler', $cache, null);
 
-        $image->composePath();
+        $image->assignFilePath();
     }
 
     public function testComposePathWithOutputFilename() {
