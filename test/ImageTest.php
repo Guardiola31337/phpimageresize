@@ -158,4 +158,25 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg', $image->composePath());
     }
 
+    public function testIsImageInCache() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'foo-output-filename'
+        );
+        $configuration = new Configuration($opts);
+        $image = new Image($url, $cache, $configuration);
+
+        $composePath = $image->composePath();
+        $originalPath = $image->obtainFilePath();
+
+        $this->assertTrue($image->isImageInCache($composePath, $originalPath));
+    }
+
 }

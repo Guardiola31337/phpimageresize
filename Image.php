@@ -87,6 +87,10 @@ class Image {
         return $newPath;
     }
 
+    public function isImageInCache($composePath, $originalPath) {
+        return false;
+    }
+
     private function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);
