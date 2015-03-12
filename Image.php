@@ -88,17 +88,10 @@ class Image {
     }
 
     public function isImageInCache($composePath, $originalPath) {
-        $isInCache = false;
-        if($this->cache->file_exists($composePath) == true):
-            $isInCache = true;
-            $origFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($originalPath));
-            $newFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($composePath));
-            if($newFileTime < $origFileTime):
-                $isInCache = false;
-            endif;
-        endif;
+        $composeFileExists = $this->cache->file_exists($composePath);
+        $fileNotOutdated = $this->fileNotOutdated($composePath, $originalPath);
 
-        return $isInCache;
+        return $composeFileExists && $fileNotOutdated;
     }
 
     private function obtainExtension() {
@@ -135,6 +128,12 @@ class Image {
     private function fileNotExpired($filePath) {
         $cacheMinutes = $this->configuration->obtainCacheMinutes();
         $this->cache->filemtime($filePath) < strtotime('+'. $cacheMinutes. ' minutes');
+    }
+
+    private function fileNotOutdated($composePath, $originalPath) {
+        $origFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($originalPath));
+        $newFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($composePath));
+        return $newFileTime >= $origFileTime;
     }
 
     private function download($filePath) {
