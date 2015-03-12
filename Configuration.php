@@ -37,7 +37,7 @@ class Configuration {
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
             'quality' => 90,
-            'cache_http_minutes' => 20,
+            self::CACHE_MINUTES_KEY => 20,
             self::WIDTH_KEY => null,
             self::HEIGHT_KEY => null);
 
