@@ -127,7 +127,7 @@ class Image {
 
     private function fileNotExpired($filePath) {
         $cacheMinutes = $this->configuration->obtainCacheMinutes();
-        $this->cache->filemtime($filePath) < strtotime('+'. $cacheMinutes. ' minutes');
+        return $this->cache->filemtime($filePath) < strtotime('+'. $cacheMinutes. ' minutes');
     }
 
     private function fileNotOutdated($composePath, $originalPath) {
