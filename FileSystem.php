@@ -22,4 +22,8 @@ class FileSystem {
         return md5_file($filename);
     }
 
+    public function date($format, $timestamp) {
+        return date($format, $timestamp);
+    }
+
 }

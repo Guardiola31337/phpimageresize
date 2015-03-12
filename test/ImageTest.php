@@ -163,6 +163,8 @@ class ImageTest extends PHPUnit_Framework_TestCase {
             ->getMock();
         $cache->method('file_exists')
             ->willReturn(true);
+        $cache->method('date')
+            ->will($this->onConsecutiveCalls('20060214132246', '20090417000926'));
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
         $opts = array(
@@ -173,8 +175,8 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $configuration = new Configuration($opts);
         $image = new Image($url, $cache, $configuration);
 
-        $composePath = $image->composePath();
         $originalPath = $image->obtainFilePath();
+        $composePath = $image->composePath();
 
         $this->assertTrue($image->isImageInCache($composePath, $originalPath));
     }

@@ -88,7 +88,17 @@ class Image {
     }
 
     public function isImageInCache($composePath, $originalPath) {
-        return false;
+        $isInCache = false;
+        if($this->cache->file_exists($composePath) == true):
+            $isInCache = true;
+            $origFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($originalPath));
+            $newFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($composePath));
+            if($newFileTime < $origFileTime):
+                $isInCache = false;
+            endif;
+        endif;
+
+        return $isInCache;
     }
 
     private function obtainExtension() {
