@@ -8,9 +8,12 @@ class Image {
 
     const EXTENSION_SIGNAL = '.';
 
+    const DATE_FORMAT = "YmdHis";
+
     private $path;
     private $valid_http_protocols = array('http', 'https');
     private $cache;
+
     private $configuration;
 
     public function __construct($url='', $cache=null, $configuration=null) {
@@ -131,8 +134,8 @@ class Image {
     }
 
     private function fileNotOutdated($composePath, $originalPath) {
-        $origFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($originalPath));
-        $newFileTime = $this->cache->date("YmdHis", $this->cache->filemtime($composePath));
+        $origFileTime = $this->cache->date(self::DATE_FORMAT, $this->cache->filemtime($originalPath));
+        $newFileTime = $this->cache->date(self::DATE_FORMAT, $this->cache->filemtime($composePath));
         return $newFileTime >= $origFileTime;
     }
 
