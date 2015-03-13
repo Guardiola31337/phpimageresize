@@ -118,7 +118,7 @@ class Configuration {
     }
 
     public function obtainQuality() {
-        return 0;
+        return $this->opts['quality'];
     }
 
     private function sanitize($opts) {
