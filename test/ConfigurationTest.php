@@ -213,4 +213,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($configuration->obtainCrop());
     }
 
+    public function testObtainCropFail() {
+        $configuration = new Configuration();
+
+        $this->assertFalse($configuration->obtainCrop());
+    }
+
 }
