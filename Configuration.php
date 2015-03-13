@@ -5,6 +5,7 @@ class Configuration {
     const REMOTE_PATH = './cache/remote/';
     const CONVERT_PATH = 'convert';
     const DEFAULT_OUTPUT_FILENAME = 'default-output-filename';
+    const DEFAULT_CANVAS_COLOR = 'transparent';
 
     const CACHE_KEY = 'cacheFolder';
     const REMOTE_KEY = 'remoteFolder';
@@ -31,7 +32,7 @@ class Configuration {
             self::SCALE_KEY => false,
             'thumbnail' => false,
             'maxOnly' => false,
-            self::CANVAS_COLOR_KEY => 'transparent',
+            self::CANVAS_COLOR_KEY => self::DEFAULT_CANVAS_COLOR,
             self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
