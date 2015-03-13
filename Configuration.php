@@ -18,6 +18,7 @@ class Configuration {
     const OUTPUT_FILENAME_KEY = 'output-filename';
     const CANVAS_COLOR_KEY = 'canvas-color';
     const QUALITY_KEY = 'quality';
+    const MAX_ONLY_KEY = 'maxOnly';
 
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
@@ -33,7 +34,7 @@ class Configuration {
             self::CROP_KEY => false,
             self::SCALE_KEY => false,
             'thumbnail' => false,
-            'maxOnly' => false,
+            self::MAX_ONLY_KEY => false,
             self::CANVAS_COLOR_KEY => self::DEFAULT_CANVAS_COLOR,
             self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
@@ -124,7 +125,7 @@ class Configuration {
     }
 
     public function obtainMaxOnly() {
-        return $this->opts['maxOnly'];
+        return $this->opts[self::MAX_ONLY_KEY];
     }
 
     private function sanitize($opts) {
