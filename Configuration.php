@@ -109,6 +109,10 @@ class Configuration {
         return $widthSignal.$heightSignal.$cropSignal.$scaleSignal;
     }
 
+    public function obtainCrop() {
+        return false;
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 

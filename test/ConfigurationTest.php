@@ -201,4 +201,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('convert', $configuration->obtainConvertPath());
     }
 
+    public function testObtainCrop() {
+        $opts = array(
+            'crop' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertTrue($configuration->obtainCrop());
+    }
+
 }
