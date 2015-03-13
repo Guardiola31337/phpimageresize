@@ -219,4 +219,9 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($configuration->obtainCrop());
     }
 
+    public function testObtainCanvasColor() {
+        $configuration = new Configuration();
+
+        $this->assertEquals('transparent', $configuration->obtainCanvasColor());
+    }
 }
