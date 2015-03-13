@@ -31,7 +31,7 @@ class Resizer {
 
         $resize = "x".$h;
 
-        $hasCrop = (true === $this->configuration->obtainCrop());
+        $hasCrop = $this->configuration->obtainCrop();
         return $resize;
     }
 
