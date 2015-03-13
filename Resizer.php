@@ -38,6 +38,10 @@ class Resizer {
             $resize = $w;
         endif;
 
+        if($hasCrop && !$isPanoramic):
+            $resize = $w;
+        endif;
+
         return $resize;
     }
 
