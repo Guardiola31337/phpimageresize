@@ -40,6 +40,10 @@ class Resizer {
         return $resize;
     }
 
+    public function commandWithCrop() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }

@@ -165,4 +165,25 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+
+    public function testCommandWithCrop() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'quality' => 90,
+            'canvas-color' => 'transparent',
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg\'', $resizer->commandWithCrop());
+
+    }
+
 }
