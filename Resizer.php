@@ -56,7 +56,14 @@ class Resizer {
     }
 
     public function commandWithScale() {
-        return '';
+        $originalPath = $this->obtainImagePath();
+        $newPath = $this->obtainImage();
+        $resize = $this->composeResizeOptions();
+
+        $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
+            " -quality ". escapeshellarg($this->configuration->obtainQuality()) . " " . escapeshellarg($newPath);
+
+        return $cmd;
     }
 
     private function checkOptions($opts) {
