@@ -124,7 +124,7 @@ class Configuration {
     }
 
     public function obtainMaxOnly() {
-        return false;
+        return $this->opts['maxOnly'];
     }
 
     private function sanitize($opts) {
