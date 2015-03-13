@@ -230,4 +230,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals(90, $configuration->obtainQuality());
     }
+
+    public function testObtainMaxOnly() {
+        $opts = array(
+            'maxOnly' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertTrue($configuration->obtainMaxOnly());
+    }
 }

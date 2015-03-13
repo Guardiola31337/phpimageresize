@@ -123,6 +123,10 @@ class Configuration {
         return $this->opts[self::QUALITY_KEY];
     }
 
+    public function obtainMaxOnly() {
+        return false;
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 
