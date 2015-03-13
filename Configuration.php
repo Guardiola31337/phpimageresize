@@ -6,6 +6,7 @@ class Configuration {
     const CONVERT_PATH = 'convert';
     const DEFAULT_OUTPUT_FILENAME = 'default-output-filename';
     const DEFAULT_CANVAS_COLOR = 'transparent';
+    const DEFAULT_QUALITY = 90;
 
     const CACHE_KEY = 'cacheFolder';
     const REMOTE_KEY = 'remoteFolder';
@@ -37,7 +38,7 @@ class Configuration {
             self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
-            self::QUALITY_KEY => 90,
+            self::QUALITY_KEY => self::DEFAULT_QUALITY,
             self::CACHE_MINUTES_KEY => 20,
             self::WIDTH_KEY => null,
             self::HEIGHT_KEY => null);
