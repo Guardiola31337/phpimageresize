@@ -121,6 +121,8 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
     public function testComposeResizeOptionsWithNoCropAndPanoramic() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
         $cache->method('getimagesize')
             ->willReturn(array('30', '20'));
 
