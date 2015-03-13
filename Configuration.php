@@ -114,7 +114,7 @@ class Configuration {
     }
 
     public function obtainCanvasColor() {
-        return '';
+        return $this->opts['canvas-color'];
     }
 
     private function sanitize($opts) {
