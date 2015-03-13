@@ -215,4 +215,24 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testDefaultCommand() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'maxOnly' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => './foo/mj.png'
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -thumbnail x30\> -quality \'90\' \'./foo/mj.png\'', $resizer->defaultCommand());
+
+    }
 }
