@@ -41,7 +41,18 @@ class Resizer {
     }
 
     public function commandWithCrop() {
-        return '';
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
+        $originalPath = $this->obtainImagePath();
+        $newPath = $this->obtainImage();
+        $resize = $this->composeResizeOptions();
+
+        $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
+            " -size ". escapeshellarg($w ."x". $h) .
+            " xc:". escapeshellarg($this->configuration->obtainCanvasColor()) .
+            " +swap -gravity center -composite -quality ". escapeshellarg($this->configuration->obtainQuality())." ".escapeshellarg($newPath);
+
+        return $cmd;
     }
 
     private function checkOptions($opts) {

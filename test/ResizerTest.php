@@ -169,12 +169,17 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
     public function testCommandWithCrop() {
         $cache = $this->getMockBuilder('FileSystem')
             ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
+        $cache->method('getimagesize')
+            ->willReturn(array('20', '30'));
 
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
         $opts = array(
-            'quality' => 90,
-            'canvas-color' => 'transparent',
+            'crop' => true,
             'width' => '30',
             'height' => '20',
             'output-filename' => null
@@ -182,7 +187,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20.jpg\'', $resizer->commandWithCrop());
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\'', $resizer->commandWithCrop());
 
     }
 
