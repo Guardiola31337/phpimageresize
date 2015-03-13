@@ -110,7 +110,7 @@ class Configuration {
     }
 
     public function obtainCrop() {
-        return false;
+        return $this->opts[self::CROP_KEY];
     }
 
     private function sanitize($opts) {
