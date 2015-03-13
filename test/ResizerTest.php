@@ -232,7 +232,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -thumbnail x30\> -quality \'90\' \'./foo/mj.png\'', $resizer->defaultCommand());
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -thumbnail \> -quality \'90\' \'./foo/mj.png\'', $resizer->defaultCommand());
 
     }
 }

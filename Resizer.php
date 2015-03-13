@@ -67,7 +67,17 @@ class Resizer {
     }
 
     public function defaultCommand() {
-        return '';
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
+        $originalPath = $this->obtainImagePath();
+        $newPath = $this->obtainImage();
+
+        $cmd = $this->configuration->obtainConvertPath() ." " . escapeshellarg($originalPath) .
+            " -thumbnail ". (!empty($h) ? 'x':'') . $w ."".
+            ($this->configuration->obtainMaxOnly() == true ? "\>" : "") .
+            " -quality ". escapeshellarg($this->configuration->obtainQuality()) ." ". escapeshellarg($newPath);
+
+        return $cmd;
     }
 
     private function checkOptions($opts) {
