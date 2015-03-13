@@ -14,6 +14,7 @@ class Configuration {
     const CROP_KEY = 'crop';
     const SCALE_KEY = 'scale';
     const OUTPUT_FILENAME_KEY = 'output-filename';
+    const CANVAS_COLOR_KEY = 'canvas-color';
 
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
@@ -21,8 +22,6 @@ class Configuration {
     const HEIGHT_SIGNAL = '_h';
 
     private $opts;
-
-
 
     public function __construct($opts=array()) {
         $sanitized= $this->sanitize($opts);
@@ -32,7 +31,7 @@ class Configuration {
             self::SCALE_KEY => false,
             'thumbnail' => false,
             'maxOnly' => false,
-            'canvas-color' => 'transparent',
+            self::CANVAS_COLOR_KEY => 'transparent',
             self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
@@ -114,7 +113,7 @@ class Configuration {
     }
 
     public function obtainCanvasColor() {
-        return $this->opts['canvas-color'];
+        return $this->opts[self::CANVAS_COLOR_KEY];
     }
 
     private function sanitize($opts) {
