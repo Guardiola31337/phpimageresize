@@ -29,18 +29,13 @@ class Resizer {
         $w = $this->configuration->obtainWidth();
         $h = $this->configuration->obtainHeight();
 
-        $resize = "x".$h;
-
         $hasCrop = $this->configuration->obtainCrop();
         $isPanoramic = $this->image->isPanoramic();
 
-        if(!$hasCrop && $isPanoramic):
-            $resize = $w;
-        endif;
+        $noCropAndPanoramic = !$hasCrop && $isPanoramic;
+        $cropAndNoPanoramic = $hasCrop && !$isPanoramic;
 
-        if($hasCrop && !$isPanoramic):
-            $resize = $w;
-        endif;
+        $resize = ($noCropAndPanoramic || $cropAndNoPanoramic) ? $w : "x".$h;
 
         return $resize;
     }
