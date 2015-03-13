@@ -25,6 +25,10 @@ class Resizer {
         return $this->image->sanitizedPath();
     }
 
+    public function composeResizeOptions() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }

@@ -97,4 +97,25 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testComposeResizeOptions() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('getimagesize')
+            ->willReturn(array('30', '20'));
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'crop' => true,
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals('x20', $resizer->composeResizeOptions());
+
+    }
+
 }
