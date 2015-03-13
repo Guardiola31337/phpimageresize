@@ -26,4 +26,8 @@ class FileSystem {
         return date($format, $timestamp);
     }
 
+    public function getimagesize($image) {
+        return getimagesize($image);
+    }
+
 }

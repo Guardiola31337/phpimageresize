@@ -98,7 +98,9 @@ class Image {
     }
 
     public function isPanoramic() {
-        return false;
+        $image = $this->obtainFilePath();
+        list($width, $height) = $this->cache->getimagesize($image);
+        return $width > $height;
     }
 
     private function obtainExtension() {

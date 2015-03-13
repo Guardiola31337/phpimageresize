@@ -205,13 +205,16 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testImageIsPanoramic() {
-        $opts = array(
-            'width' => '30',
-            'height' => '20',
-            'output-filename' => null
-        );
-        $configuration = new Configuration($opts);
-        $image = new Image('', null, $configuration);
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $cache->method('getimagesize')
+            ->willReturn(array('30', '20'));
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $image = new Image($url, $cache);
 
         $this->assertTrue($image->isPanoramic());
     }
