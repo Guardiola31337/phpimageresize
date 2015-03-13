@@ -242,4 +242,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($configuration->obtainMaxOnly());
     }
+
+    public function testObtainMaxOnlyFail() {
+        $configuration = new Configuration();
+
+        $this->assertFalse($configuration->obtainMaxOnly());
+    }
 }
