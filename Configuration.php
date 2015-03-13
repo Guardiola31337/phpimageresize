@@ -16,6 +16,7 @@ class Configuration {
     const SCALE_KEY = 'scale';
     const OUTPUT_FILENAME_KEY = 'output-filename';
     const CANVAS_COLOR_KEY = 'canvas-color';
+    const QUALITY_KEY = 'quality';
 
     const CROP_SIGNAL = '_cp';
     const SCALE_SIGNAL = '_sc';
@@ -36,7 +37,7 @@ class Configuration {
             self::OUTPUT_FILENAME_KEY => self::DEFAULT_OUTPUT_FILENAME,
             self::CACHE_KEY => self::CACHE_PATH,
             self::REMOTE_KEY => self::REMOTE_PATH,
-            'quality' => 90,
+            self::QUALITY_KEY => 90,
             self::CACHE_MINUTES_KEY => 20,
             self::WIDTH_KEY => null,
             self::HEIGHT_KEY => null);
@@ -118,7 +119,7 @@ class Configuration {
     }
 
     public function obtainQuality() {
-        return $this->opts['quality'];
+        return $this->opts[self::QUALITY_KEY];
     }
 
     private function sanitize($opts) {
