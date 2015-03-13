@@ -97,6 +97,10 @@ class Image {
         return $composeFileExists && $fileNotOutdated;
     }
 
+    public function isPanoramic() {
+        return false;
+    }
+
     private function obtainExtension() {
         $filename = $this->obtainFileName();
         $finfo = pathinfo($filename);

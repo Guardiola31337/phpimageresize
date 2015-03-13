@@ -204,4 +204,16 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($image->isImageInCache($composePath, $originalPath));
     }
 
+    public function testImageIsPanoramic() {
+        $opts = array(
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+        $configuration = new Configuration($opts);
+        $image = new Image('', null, $configuration);
+
+        $this->assertTrue($image->isPanoramic());
+    }
+
 }
