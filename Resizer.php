@@ -26,7 +26,13 @@ class Resizer {
     }
 
     public function composeResizeOptions() {
-        return '';
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
+
+        $resize = "x".$h;
+
+        $hasCrop = (true === $this->configuration->obtainCrop());
+        return $resize;
     }
 
     private function checkOptions($opts) {
