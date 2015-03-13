@@ -55,6 +55,10 @@ class Resizer {
         return $cmd;
     }
 
+    public function commandWithScale() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
