@@ -224,4 +224,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('transparent', $configuration->obtainCanvasColor());
     }
+
+    public function testObtainQuality() {
+        $configuration = new Configuration();
+
+        $this->assertEquals(90, $configuration->obtainQuality());
+    }
 }

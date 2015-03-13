@@ -117,6 +117,10 @@ class Configuration {
         return $this->opts[self::CANVAS_COLOR_KEY];
     }
 
+    public function obtainQuality() {
+        return 0;
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 
