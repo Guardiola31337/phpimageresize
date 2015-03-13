@@ -142,4 +142,27 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testComposeResizeOptionsWithCropAndNoPanoramic() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $cache->method('getimagesize')
+            ->willReturn(array('20', '30'));
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'crop' => true,
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals('30', $resizer->composeResizeOptions());
+
+    }
+
 }
