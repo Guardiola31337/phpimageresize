@@ -316,7 +316,6 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
                 0)
             ->willReturn('');
 
-
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
         $opts = array(
@@ -329,6 +328,38 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $resizer = new Resizer($url, $cache, $opts);
 
         $this->assertEquals(0, $resizer->executeCommand());
+
+    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testResizeCommandFail() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+
+        $cache->expects($this->once())
+            ->method('exec')
+            ->with(
+                $this->equalTo('convert \'./cache/remote/mf.jpg\' -thumbnail \> -quality \'90\' \'./foo/mj.png\''),
+                '',
+                1)
+            ->willReturn('');
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'maxOnly' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => './foo/mj.png'
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $resizer->executeCommand();
 
     }
 }
