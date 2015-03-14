@@ -260,4 +260,10 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($configuration->obtainScale());
     }
+
+    public function testObtainScaleFail() {
+        $configuration = new Configuration();
+
+        $this->assertFalse($configuration->obtainScale());
+    }
 }
