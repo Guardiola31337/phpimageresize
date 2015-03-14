@@ -81,7 +81,16 @@ class Resizer {
     }
 
     public function executeCommand() {
-        return 1;
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
+
+        if(!empty($w) and !empty($h)):
+            $cmd = $this->commandWithCrop();
+        endif;
+
+        $c = $this->cache->exec($cmd, $output, $return_code);
+
+        return $return_code;
     }
 
     private function checkOptions($opts) {

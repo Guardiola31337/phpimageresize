@@ -30,4 +30,8 @@ class FileSystem {
         return getimagesize($image);
     }
 
+    public function exec($cmd, $output, $return_code) {
+        return exec($cmd, $output, $return_code);
+    }
+
 }

@@ -246,6 +246,17 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $cache->method('getimagesize')
             ->willReturn(array('20', '30'));
 
+        $cache->expects($this->once())
+            ->method('exec')
+            ->with(
+                $this->equalTo('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\''),
+                '',
+                0)
+            ->willReturn(array(
+                $this->returnArgument(0),
+                $this->returnArgument(1),
+                $this->returnArgument(2)));
+
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
         $opts = array(
