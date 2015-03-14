@@ -86,6 +86,8 @@ class Resizer {
             if($this->configuration->obtainScale()):
                 $cmd = $this->commandWithScale();
             endif;
+        else:
+            $cmd = $this->defaultCommand();
         endif;
 
         $c = $this->cache->exec($cmd, $output, $return_code);
