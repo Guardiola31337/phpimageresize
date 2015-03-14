@@ -81,10 +81,7 @@ class Resizer {
     }
 
     public function executeCommand() {
-        $w = $this->configuration->obtainWidth();
-        $h = $this->configuration->obtainHeight();
-
-        if(!empty($w) and !empty($h)):
+        if($this->configuration->hasDimensions()):
             $cmd = $this->commandWithCrop();
         endif;
 
