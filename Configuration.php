@@ -128,6 +128,10 @@ class Configuration {
         return $this->opts[self::MAX_ONLY_KEY];
     }
 
+    public function obtainScale() {
+        return false;
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 

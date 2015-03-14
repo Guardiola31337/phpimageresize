@@ -248,4 +248,16 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
 
         $this->assertFalse($configuration->obtainMaxOnly());
     }
+
+    public function testObtainScale() {
+        $opts = array(
+            'scale' => true,
+            'width' => null,
+            'height' => null,
+            'output-filename' => 'default-output-filename'
+        );
+        $configuration = new Configuration($opts);
+
+        $this->assertTrue($configuration->obtainScale());
+    }
 }
