@@ -11,6 +11,7 @@ class Image {
     const DATE_FORMAT = "YmdHis";
 
     private $path;
+    private $url;
     private $valid_http_protocols = array('http', 'https');
     private $cache;
 
@@ -19,6 +20,7 @@ class Image {
     public function __construct($url='', $cache=null, $configuration=null) {
         if ($cache == null) $cache = new FileSystem();
         if ($configuration == null) $configuration = new Configuration();
+        $this->url = $this->sanitize($url);
         $this->path = $this->sanitize($url);
         $this->checkCache($cache);
         $this->cache = $cache;
@@ -35,7 +37,7 @@ class Image {
     }
 
     public function obtainFileName() {
-        $finfo = pathinfo($this->path);
+        $finfo = pathinfo($this->url);
         list($filename) = explode('?', $finfo['basename']);
         return $filename;
     }
@@ -114,8 +116,8 @@ class Image {
     }
 
     private function obtainScheme() {
-        if ($this->path == '') return '';
-        $purl = parse_url($this->path);
+        if ($this->url == '') return '';
+        $purl = parse_url($this->url);
         return $purl['scheme'];
     }
 

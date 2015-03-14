@@ -83,6 +83,9 @@ class Resizer {
     public function executeCommand() {
         if($this->configuration->hasDimensions()):
             $cmd = $this->commandWithCrop();
+            if($this->configuration->obtainScale()):
+                $cmd = $this->commandWithScale();
+            endif;
         endif;
 
         $c = $this->cache->exec($cmd, $output, $return_code);

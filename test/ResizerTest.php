@@ -252,10 +252,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
                 $this->equalTo('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\''),
                 '',
                 0)
-            ->willReturn(array(
-                $this->returnArgument(0),
-                $this->returnArgument(1),
-                $this->returnArgument(2)));
+            ->willReturn('');
 
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
@@ -288,10 +285,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
                 $this->equalTo('convert \'./cache/remote/mf.jpg\' -resize \'x20\' -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_sc.jpg\''),
                 '',
                 0)
-            ->willReturn(array(
-                $this->returnArgument(0),
-                $this->returnArgument(1),
-                $this->returnArgument(2)));
+            ->willReturn('');
 
         $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
 
