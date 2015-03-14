@@ -80,6 +80,10 @@ class Resizer {
         return $cmd;
     }
 
+    public function executeCommand() {
+        return 1;
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
