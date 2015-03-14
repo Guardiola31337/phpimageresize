@@ -129,7 +129,7 @@ class Configuration {
     }
 
     public function obtainScale() {
-        return false;
+        return $this->opts[self::SCALE_KEY];
     }
 
     private function sanitize($opts) {
