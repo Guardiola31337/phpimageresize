@@ -132,6 +132,10 @@ class Configuration {
         return $this->opts[self::SCALE_KEY];
     }
 
+    public function hasDimensions() {
+        return false;
+    }
+
     private function sanitize($opts) {
         if($opts == null) return array();
 
