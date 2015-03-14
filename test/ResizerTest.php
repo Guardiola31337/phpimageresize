@@ -271,4 +271,40 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(0, $resizer->executeCommand());
 
     }
+
+    public function testResizeWithScaleCommand() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
+        $cache->method('getimagesize')
+            ->willReturn(array('20', '30'));
+
+        $cache->expects($this->once())
+            ->method('exec')
+            ->with(
+                $this->equalTo('convert \'./cache/remote/mf.jpg\' -resize \'x20\' -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_sc.jpg\''),
+                '',
+                0)
+            ->willReturn(array(
+                $this->returnArgument(0),
+                $this->returnArgument(1),
+                $this->returnArgument(2)));
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'scale' => true,
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals(0, $resizer->executeCommand());
+
+    }
 }
