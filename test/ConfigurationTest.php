@@ -268,7 +268,11 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHasDimensions() {
-        $configuration = new Configuration();
+        $opts = array(
+            'width' => '20',
+            'height' => '30'
+        );
+        $configuration = new Configuration($opts);
 
         $this->assertTrue($configuration->hasDimensions());
     }

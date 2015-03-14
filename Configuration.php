@@ -133,7 +133,7 @@ class Configuration {
     }
 
     public function hasDimensions() {
-        return false;
+        return (!empty($this->opts[self::HEIGHT_KEY]) && !empty($this->opts[self::WIDTH_KEY]));
     }
 
     private function sanitize($opts) {
