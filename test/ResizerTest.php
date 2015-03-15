@@ -368,6 +368,8 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
             ->getMock();
         $cache->method('file_exists')
             ->willReturn(true);
+        $cache->method('date')
+            ->will($this->onConsecutiveCalls('20090417000926', '20060214132246'));
         $cache->method('md5_file')
             ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
         $cache->method('getimagesize')

@@ -97,7 +97,18 @@ class Resizer {
     }
 
     public function resize() {
-        return '';
+        $originalPath = $this->obtainImagePath();
+        $newPath = $this->obtainImage();
+
+        if(!$this->image->isImageInCache($newPath, $originalPath)):
+            try {
+                $this->executeCommand();
+            } catch (RuntimeException $e) {
+                throw new RuntimeException();
+            }
+        endif;
+
+        return $newPath;
     }
 
     private function checkOptions($opts) {
