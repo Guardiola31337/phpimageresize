@@ -51,9 +51,32 @@ class Resizer {
         return $cmd;
     }
 
+    public function commandWithCropWithParamenters($newPath, $originalPath) {
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
+
+        $resize = $this->composeResizeOptions();
+
+        $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
+            " -size ". escapeshellarg($w ."x". $h) .
+            " xc:". escapeshellarg($this->configuration->obtainCanvasColor()) .
+            " +swap -gravity center -composite -quality ". escapeshellarg($this->configuration->obtainQuality())." ".escapeshellarg($newPath);
+
+        return $cmd;
+    }
+
     public function commandWithScale() {
         $originalPath = $this->obtainImagePath();
         $newPath = $this->obtainImage();
+        $resize = $this->composeResizeOptions();
+
+        $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
+            " -quality ". escapeshellarg($this->configuration->obtainQuality()) . " " . escapeshellarg($newPath);
+
+        return $cmd;
+    }
+
+    public function commandWithScaleWithParameters($newPath, $originalPath) {
         $resize = $this->composeResizeOptions();
 
         $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
@@ -67,6 +90,18 @@ class Resizer {
         $h = $this->configuration->obtainHeight();
         $originalPath = $this->obtainImagePath();
         $newPath = $this->obtainImage();
+
+        $cmd = $this->configuration->obtainConvertPath() ." " . escapeshellarg($originalPath) .
+            " -thumbnail ". (!empty($h) ? 'x':'') . $w ."".
+            ($this->configuration->obtainMaxOnly() == true ? "\>" : "") .
+            " -quality ". escapeshellarg($this->configuration->obtainQuality()) ." ". escapeshellarg($newPath);
+
+        return $cmd;
+    }
+
+    public function defaultCommandWithParameters($newPath, $originalPath) {
+        $w = $this->configuration->obtainWidth();
+        $h = $this->configuration->obtainHeight();
 
         $cmd = $this->configuration->obtainConvertPath() ." " . escapeshellarg($originalPath) .
             " -thumbnail ". (!empty($h) ? 'x':'') . $w ."".
@@ -96,13 +131,33 @@ class Resizer {
         return $return_code;
     }
 
+    public function executeCommandWithParameters($newPath, $originalPath) {
+        if($this->configuration->hasDimensions()):
+            $cmd = $this->commandWithCropWithParamenters($newPath, $originalPath);
+            if($this->configuration->obtainScale()):
+                $cmd = $this->commandWithScaleWithParameters($newPath, $originalPath);
+            endif;
+        else:
+            $cmd = $this->defaultCommandWithParameters($newPath, $originalPath);
+        endif;
+
+        $code_return = $this->cache->exec($cmd, $output, $return_code);
+
+        if($code_return != 0) {
+            error_log("Tried to execute : $cmd, return code: $return_code, output: " . print_r($output, true));
+            throw new RuntimeException();
+        }
+
+        return $return_code;
+    }
+
     public function resize() {
         $originalPath = $this->obtainImagePath();
         $newPath = $this->obtainImage();
 
         if(!$this->image->isImageInCache($newPath, $originalPath)):
             try {
-                $this->executeCommand();
+                $this->executeCommandWithParameters($newPath, $originalPath);
             } catch (RuntimeException $e) {
                 throw new RuntimeException();
             }
