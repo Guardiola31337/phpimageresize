@@ -186,7 +186,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\'', $resizer->commandWithCrop());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\'', $resizer->commandWithCropWithParameters($newPath, $originalPath));
 
     }
 
@@ -211,7 +214,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'x20\' -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_sc.jpg\'', $resizer->commandWithScale());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -resize \'x20\' -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_sc.jpg\'', $resizer->commandWithScaleWithParameters($newPath, $originalPath));
 
     }
 
@@ -232,7 +238,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -thumbnail \> -quality \'90\' \'./foo/mj.png\'', $resizer->defaultCommand());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals('convert \'./cache/remote/mf.jpg\' -thumbnail \> -quality \'90\' \'./foo/mj.png\'', $resizer->defaultCommandWithParameters($newPath, $originalPath));
 
     }
 
@@ -265,7 +274,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals(0, $resizer->executeCommand());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals(0, $resizer->executeCommandWithParameters($newPath, $originalPath));
 
     }
 
@@ -298,7 +310,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals(0, $resizer->executeCommand());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals(0, $resizer->executeCommandWithParameters($newPath, $originalPath));
 
     }
 
@@ -327,7 +342,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $this->assertEquals(0, $resizer->executeCommand());
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $this->assertEquals(0, $resizer->executeCommandWithParameters($newPath, $originalPath));
 
     }
 
@@ -359,7 +377,10 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer = new Resizer($url, $cache, $opts);
 
-        $resizer->executeCommand();
+        $originalPath = $resizer->obtainImagePath();
+        $newPath = $resizer->obtainImage();
+
+        $resizer->executeCommandWithParameters($newPath, $originalPath);
 
     }
 
