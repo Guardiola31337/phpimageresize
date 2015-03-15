@@ -90,7 +90,12 @@ class Resizer {
             $cmd = $this->defaultCommand();
         endif;
 
-        $c = $this->cache->exec($cmd, $output, $return_code);
+        $code_return = $this->cache->exec($cmd, $output, $return_code);
+
+        if($code_return != 0) {
+            error_log("Tried to execute : $cmd, return code: $return_code, output: " . print_r($output, true));
+            throw new RuntimeException();
+        }
 
         return $return_code;
     }

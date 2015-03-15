@@ -31,7 +31,8 @@ class FileSystem {
     }
 
     public function exec($cmd, $output, $return_code) {
-        return exec($cmd, $output, $return_code);
+        exec($cmd, $output, $return_code);
+        return $return_code;
     }
 
 }
