@@ -362,4 +362,37 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
         $resizer->executeCommand();
 
     }
+
+    public function testResize() {
+        $cache = $this->getMockBuilder('FileSystem')
+            ->getMock();
+        $cache->method('file_exists')
+            ->willReturn(true);
+        $cache->method('md5_file')
+            ->willReturn('a90d6abb5d7c3eccfdbb80507f5c6b51');
+        $cache->method('getimagesize')
+            ->willReturn(array('20', '30'));
+
+        $cache->expects($this->once())
+            ->method('exec')
+            ->with(
+                $this->equalTo('convert \'./cache/remote/mf.jpg\' -resize \'30\' -size \'30x20\' xc:\'transparent\' +swap -gravity center -composite -quality \'90\' \'./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg\''),
+                '',
+                0)
+            ->willReturn(0);
+
+        $url = 'http://martinfowler.com/mf.jpg?query=hello&s=fowler';
+
+        $opts = array(
+            'crop' => true,
+            'width' => '30',
+            'height' => '20',
+            'output-filename' => null
+        );
+
+        $resizer = new Resizer($url, $cache, $opts);
+
+        $this->assertEquals('./cache/a90d6abb5d7c3eccfdbb80507f5c6b51_w30_h20_cp.jpg', $resizer->resize());
+
+    }
 }

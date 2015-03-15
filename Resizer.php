@@ -96,6 +96,10 @@ class Resizer {
         return $return_code;
     }
 
+    public function resize() {
+        return '';
+    }
+
     private function checkOptions($opts) {
         if (!(is_array($opts))) throw new InvalidArgumentException();
     }
