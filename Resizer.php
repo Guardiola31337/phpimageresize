@@ -119,7 +119,7 @@ class Resizer {
         try {
             $this->configuration = new Configuration($opts);
         } catch (InvalidArgumentException $e) {
-            throw new InvalidArgumentException;
+            throw new InvalidArgumentException();
         }
     }
 
@@ -127,7 +127,7 @@ class Resizer {
         try {
             $this->image = new Image($url, $cache, $configuration);
         } catch (InvalidArgumentException $e) {
-            throw new InvalidArgumentException;
+            throw new InvalidArgumentException();
         }
     }
 

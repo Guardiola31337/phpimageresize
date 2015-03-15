@@ -49,7 +49,7 @@ class Configuration {
         }
 
         if(empty($opts[self::OUTPUT_FILENAME_KEY]) && empty($opts[self::HEIGHT_KEY]) && empty($opts[self::WIDTH_KEY])) {
-            throw new InvalidArgumentException;
+            throw new InvalidArgumentException();
         }
 
         $this->opts = array_merge($defaults, $sanitized);
