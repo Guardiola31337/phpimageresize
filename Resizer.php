@@ -36,7 +36,7 @@ class Resizer {
         return $resize;
     }
 
-    public function commandWithCropWithParameters($newPath, $originalPath) {
+    public function commandWithCrop($newPath, $originalPath) {
         $w = $this->configuration->obtainWidth();
         $h = $this->configuration->obtainHeight();
 
@@ -50,7 +50,7 @@ class Resizer {
         return $cmd;
     }
 
-    public function commandWithScaleWithParameters($newPath, $originalPath) {
+    public function commandWithScale($newPath, $originalPath) {
         $resize = $this->composeResizeOptions();
 
         $cmd = $this->configuration->obtainConvertPath() ." ". escapeshellarg($originalPath) ." -resize ". escapeshellarg($resize) .
@@ -59,7 +59,7 @@ class Resizer {
         return $cmd;
     }
 
-    public function defaultCommandWithParameters($newPath, $originalPath) {
+    public function defaultCommand($newPath, $originalPath) {
         $w = $this->configuration->obtainWidth();
         $h = $this->configuration->obtainHeight();
 
@@ -71,14 +71,14 @@ class Resizer {
         return $cmd;
     }
 
-    public function executeCommandWithParameters($newPath, $originalPath) {
+    public function executeCommand($newPath, $originalPath) {
         if($this->configuration->hasDimensions()):
-            $cmd = $this->commandWithCropWithParameters($newPath, $originalPath);
+            $cmd = $this->commandWithCrop($newPath, $originalPath);
             if($this->configuration->obtainScale()):
-                $cmd = $this->commandWithScaleWithParameters($newPath, $originalPath);
+                $cmd = $this->commandWithScale($newPath, $originalPath);
             endif;
         else:
-            $cmd = $this->defaultCommandWithParameters($newPath, $originalPath);
+            $cmd = $this->defaultCommand($newPath, $originalPath);
         endif;
 
         $code_return = $this->cache->exec($cmd, $output, $return_code);
@@ -97,7 +97,7 @@ class Resizer {
 
         if(!$this->image->isImageInCache($newPath, $originalPath)):
             try {
-                $this->executeCommandWithParameters($newPath, $originalPath);
+                $this->executeCommand($newPath, $originalPath);
             } catch (RuntimeException $e) {
                 throw new RuntimeException();
             }
