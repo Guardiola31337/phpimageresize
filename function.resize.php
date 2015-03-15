@@ -102,37 +102,19 @@ function doResize($image, $newPath, $configuration) {
 }
 
 function resize($originalImage, $opts=null){
-	try {
-		$configuration = new Configuration($opts);
-	} catch (InvalidArgumentException $e) {
-		return 'needed more arguments for resize';
-	}
-
-	$image = new Image($originalImage, null, $configuration);
-
-	// This has to be done in resizer resize
-
     try {
-        $newPath = $image->composePath();
-    } catch (Exception $e) {
-        return 'image not found';
+        $resizer = new Resizer($originalImage, null, $opts);
+    } catch (InvalidArgumentException $e) {
+        return 'needed more arguments for resize';
     }
 
-	$originalImage = $image->sanitizedPath();
+    try {
+        $newPath = $resizer->resize();
+    } catch (Exception $e) {
+        return 'something went wrong';
+    }
 
-    $create = !isInCache($newPath, $originalImage);
-
-	if($create == true):
-		try {
-			doResize($originalImage, $newPath, $configuration);
-		} catch (Exception $e) {
-			return 'cannot resize the image';
-		}
-	endif;
-
-	// The new path must be the return value of resizer resize
-
-	$cacheFilePath = str_replace($_SERVER['DOCUMENT_ROOT'],'',$newPath);
+	$cacheFilePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $newPath);
 
 	return $cacheFilePath;
 	

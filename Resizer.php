@@ -92,16 +92,17 @@ class Resizer {
     }
 
     public function resize() {
-        $originalPath = $this->obtainImagePath();
-        $newPath = $this->obtainImage();
+        try {
+            $originalPath = $this->obtainImagePath();
+            $newPath = $this->obtainImage();
 
-        if(!$this->image->isImageInCache($newPath, $originalPath)):
-            try {
+            if(!$this->image->isImageInCache($newPath, $originalPath)):
                 $this->executeCommand($newPath, $originalPath);
-            } catch (RuntimeException $e) {
-                throw new RuntimeException();
-            }
-        endif;
+            endif;
+
+        } catch (RuntimeException $e) {
+            throw new RuntimeException();
+        }
 
         return $newPath;
     }
