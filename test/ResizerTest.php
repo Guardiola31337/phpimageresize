@@ -93,7 +93,7 @@ class ResizerTest extends PHPUnit_Framework_TestCase {
 
         $resizer->obtainImage();
 
-        $this->assertEquals('./cache/remote/mf.jpg', $resizer->obtainOriginalPath());
+        $this->assertEquals('./cache/remote/mf.jpg', $resizer->obtainImagePath());
 
     }
 
