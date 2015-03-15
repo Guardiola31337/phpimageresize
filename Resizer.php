@@ -21,10 +21,6 @@ class Resizer {
         return $this->image->obtainFilePath();
     }
 
-    public function obtainOriginalPath() {
-        return $this->image->sanitizedPath();
-    }
-
     public function composeResizeOptions() {
         $w = $this->configuration->obtainWidth();
         $h = $this->configuration->obtainHeight();
